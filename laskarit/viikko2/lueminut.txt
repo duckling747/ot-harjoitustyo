@@ -1,4 +1,0 @@
-Testientekohetkellä Debianissa, jota käytän, on edelleen OpenJDK, jossa ei ole korjattuna
-ohjelmistotekniikan kurssin github-sivullakin mainittua Maven-bugia. Toistaiseksi
-käytän vielä OpenJDK:ta, mutta jatkossa, jos jacocon rivikattavuuskaavioita
-tarvitaan lisää, aloitan projektit Oraclen Javalla.

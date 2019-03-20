@@ -131,34 +131,42 @@ public class KassapaateTest {
     public void korttiostoToimii7() {
         Maksukortti mk = new Maksukortti(240);
         k.syoMaukkaasti(mk);
-        assertThat(k.kassassaRahaa(), is(100000));
+        assertThat(k.maukkaitaLounaitaMyyty(), is(0));
     }
 
     @Test
     public void korttiostoToimii8() {
         Maksukortti mk = new Maksukortti(400);
         k.syoMaukkaasti(mk);
-        assertThat(k.kassassaRahaa(), is(100000 + 400));
+        assertThat(k.maukkaitaLounaitaMyyty(), is(1));
     }
 
     @Test
     public void korttiostoToimii9() {
         Maksukortti mk = new Maksukortti(2);
         k.syoEdullisesti(mk);
-        assertThat(k.kassassaRahaa(), is(100000));
+        assertThat(k.edullisiaLounaitaMyyty(), is(0));
     }
 
     @Test
     public void korttiostoToimii10() {
         Maksukortti mk = new Maksukortti(240);
         k.syoEdullisesti(mk);
-        assertThat(k.kassassaRahaa(), is(100000 + 240));
+        assertThat(k.edullisiaLounaitaMyyty(), is(1));
     }
 
     @Test
     public void korttilatausToimii1() {
         Maksukortti mk = new Maksukortti(400);
         k.lataaRahaaKortille(mk, 100);
-        assertThat(mk.saldo(), is(500));
+        assertThat(k.kassassaRahaa(), is(100000 + 100));
     }
+
+    @Test
+    public void korttilatausToimii2() {
+        Maksukortti mk = new Maksukortti(400);
+        k.lataaRahaaKortille(mk, -1);
+        assertThat(k.kassassaRahaa(), is(100000));
+    }
+
 }
