@@ -9,4 +9,7 @@ tätä nykyä kansiosta **laskarit**.
 
 [komentorivi.txt](https://github.com/duckling747/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
-Konfliktitestaus
+### Viikko 2
+[screenshot.png](https://github.com/duckling747/ot-harjoitustyo/blob/master/laskarit/viikko2/screenshot.png)
+
+[alustava määrittelydokumentti](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
