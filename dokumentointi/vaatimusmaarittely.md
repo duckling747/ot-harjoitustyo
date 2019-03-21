@@ -10,7 +10,7 @@ Koska kyseessä on peli, kaikki käyttäjät ovat yhdenveroisia ja samassa rooli
 
 ## Suunnitellut toiminnallisuudet
 
-Pelissä on vuoropohjaisia taisteluja, yksinkertainen tarina ja jonkinlainen kartta, jota pitkin pelaaja etenee kohti maalia. Eniten merkitystä on kuitenkin taisteluilla ja tarinalla. Tarina etenee eri tavoin pelaajan valitessa avainkohdissa erilaista vaihtoehdoista, ja tätä etenemistä voidaan kuvata puumaisella rakenteella. Taistelut ovat vuoropohjaisia; kts. esim. [Pokémon Red ja Blue](https://en.wikipedia.org/wiki/Pok%C3%A9mon_Red_and_Blue).
+Pelissä on taisteluja, yksinkertainen tarina ja jonkinlainen kartta tai valikko, jota seuraamalla pelaaja etenee kohti maalia. Eniten merkitystä on kuitenkin taisteluilla ja tarinalla. Tarina etenee eri tavoin pelaajan valitessa avainkohdissa erilaista vaihtoehdoista, ja tätä etenemistä voidaan kuvata puumaisella rakenteella. Taistelut ovat vuoropohjaisia; kts. esim. [Pokémon Red ja Blue](https://en.wikipedia.org/wiki/Pok%C3%A9mon_Red_and_Blue).
 
 ### Ohjelmassa on ainakin:
 

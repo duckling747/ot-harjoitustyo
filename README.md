@@ -13,3 +13,5 @@ tätä nykyä kansiosta **laskarit**.
 [screenshot.png](https://github.com/duckling747/ot-harjoitustyo/blob/master/laskarit/viikko2/screenshot.png)
 
 [alustava määrittelydokumentti](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
+
+[työaikakirjanpito](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
