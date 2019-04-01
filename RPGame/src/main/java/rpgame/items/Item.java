@@ -4,11 +4,11 @@ import rpgame.creatures.Actor;
 
 public abstract class Item implements Comparable<Item> {
 
-    abstract void function(Actor target);
+    public abstract void function(Actor target);
 
-    abstract String getName();
+    public abstract String getName();
 
-    abstract String getDescription();
+    public abstract String getDescription();
 
     @Override
     public int compareTo(Item o) {

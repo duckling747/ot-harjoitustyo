@@ -3,19 +3,18 @@ package rpgame.items;
 import main.Main;
 import rpgame.creatures.Actor;
 
-public class ManaDrink extends Item {
+public class ForestMushroom extends Item {
 
-    private final String name;
-    private final String description;
+    private final String name, description;
 
-    public ManaDrink() {
-        this.name = "Mana Drink";
-        this.description = "Restores Mana";
+    public ForestMushroom() {
+        this.name = "Magical mushroom";
+        this.description = "A mushroom from the magic forest";
     }
 
     @Override
     public void function(Actor target) {
-        target.gainMana(100 + Main.RANDOM_SOURCE.nextInt(300));
+        target.gainMana(300 + Main.RANDOM_SOURCE.nextInt(900));
     }
 
     @Override

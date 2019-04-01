@@ -1,5 +1,6 @@
 package rpgame.items;
 
+import main.Main;
 import rpgame.creatures.Actor;
 
 public class Bomb extends Item {
@@ -7,14 +8,14 @@ public class Bomb extends Item {
     private final String name;
     private final String description;
 
-    public Bomb(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Bomb() {
+        this.name = "Bomb";
+        this.description = "A bomb that explodes and causes damage";
     }
 
     @Override
     public void function(Actor target) {
-        target.loseHealth(30);
+        target.loseHealth(100 + Main.RANDOM_SOURCE.nextInt(300));
     }
 
     @Override

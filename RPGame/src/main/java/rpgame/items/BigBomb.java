@@ -3,19 +3,18 @@ package rpgame.items;
 import main.Main;
 import rpgame.creatures.Actor;
 
-public class ManaDrink extends Item {
+public class BigBomb extends Item {
 
-    private final String name;
-    private final String description;
+    private final String name, description;
 
-    public ManaDrink() {
-        this.name = "Mana Drink";
-        this.description = "Restores Mana";
+    public BigBomb() {
+        this.name = "An extremely large bomb";
+        this.description = "Explodes horribly and damages things";
     }
 
     @Override
     public void function(Actor target) {
-        target.gainMana(100 + Main.RANDOM_SOURCE.nextInt(300));
+        target.loseHealth(300 + Main.RANDOM_SOURCE.nextInt(500));
     }
 
     @Override
