@@ -1,17 +1,28 @@
-# Harjoitustyö
+# RPG
 
-Tämä on kurssin *Ohjelmistotuotanto* harjoitustyö. Tänne tulee kurssin laskareita ja sitä
-mukaa kun kurssi etenee, työn välivaiheita sekä lopullinen valmis työ. Laskarit löytyvät
-tätä nykyä kansiosta **laskarit**.
-## Tehtävät
-### Viikko 1
-[gitlog.txt](https://github.com/duckling747/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+Tämä on kurssin *Ohjelmistotuotanto* harjoitustyö. Tänne tulee kurssin laskareita ja sitä mukaa kun kurssi etenee, työn välivaiheita sekä lopullinen valmis työ. Sovellus on simppeli vuoropohjainen RPG, joka on toteutettu JavaFX:llä. 
 
-[komentorivi.txt](https://github.com/duckling747/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+## Dokumentaatio
 
-### Viikko 2
-[screenshot.png](https://github.com/duckling747/ot-harjoitustyo/blob/master/laskarit/viikko2/screenshot.png)
+[Vaatimusmäärittely](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
 
-[alustava määrittelydokumentti](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
+[Työaikakirjanpito](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
 
-[työaikakirjanpito](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
+## Komentorivi
+
+### Testaus
+
+Ohjelman voi ajaa komennolla
+```
+mvn compile exec:java -Dexec.mainClass=rpgame.main.Main
+```
+
+Testit suoritetaan komennolla
+```
+mvn test
+```
+Testikattavuusraportin saa luotua komennolla
+```
+mvn jacoco:report
+```
+Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
