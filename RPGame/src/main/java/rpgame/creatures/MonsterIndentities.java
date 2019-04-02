@@ -1,7 +1,7 @@
 package rpgame.creatures;
 
 import java.util.ArrayList;
-import main.Main;
+import rpgame.main.Main;
 
 public class MonsterIndentities {
 

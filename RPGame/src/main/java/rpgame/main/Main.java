@@ -1,4 +1,4 @@
-package main;
+package rpgame.main;
 
 import java.util.Random;
 import static javafx.application.Application.launch;

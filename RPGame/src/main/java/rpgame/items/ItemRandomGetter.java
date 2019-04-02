@@ -2,7 +2,7 @@ package rpgame.items;
 
 import java.util.ArrayList;
 import java.util.List;
-import main.Main;
+import rpgame.main.Main;
 
 public class ItemRandomGetter {
 

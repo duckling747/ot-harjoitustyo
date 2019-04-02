@@ -1,6 +1,6 @@
-package battle;
+package rpgame.battle;
 
-import main.Main;
+import rpgame.main.Main;
 import rpgame.creatures.Actor;
 import rpgame.creatures.Monster;
 import rpgame.items.Item;

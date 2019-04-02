@@ -1,4 +1,4 @@
-package progression;
+package rpgame.progression;
 
 import java.util.HashMap;
 

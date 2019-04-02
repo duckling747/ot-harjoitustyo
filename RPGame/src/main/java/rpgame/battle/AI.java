@@ -1,6 +1,6 @@
-package battle;
+package rpgame.battle;
 
-import main.Main;
+import rpgame.main.Main;
 
 public class AI {
 

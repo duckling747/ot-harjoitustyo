@@ -1,8 +1,8 @@
-package progression;
+package rpgame.progression;
 
 import java.util.ArrayList;
 import java.util.List;
-import main.Main;
+import rpgame.main.Main;
 import rpgame.creatures.Monster;
 import rpgame.creatures.MonsterIndentities;
 

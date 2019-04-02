@@ -1,6 +1,6 @@
 package rpgame.creatures;
 
-import main.Main;
+import rpgame.main.Main;
 import rpgame.items.Item;
 
 public class WarriorCharacter extends Actor implements LevelUp {
