@@ -1,6 +1,5 @@
 package rpgame.items;
 
-import main.Main;
 import rpgame.creatures.Actor;
 
 public class Bomb extends Item {
@@ -14,8 +13,9 @@ public class Bomb extends Item {
     }
 
     @Override
-    public void function(Actor target) {
-        target.loseHealth(100 + Main.RANDOM_SOURCE.nextInt(300));
+    public String function(Actor target) {
+        target.loseHealth(60);
+        return "A vicious opponent uses a " + name + " and " + target.getName() + " loses 60 health.";
     }
 
     @Override

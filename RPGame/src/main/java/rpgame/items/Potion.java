@@ -1,6 +1,5 @@
 package rpgame.items;
 
-import main.Main;
 import rpgame.creatures.Actor;
 
 public class Potion extends Item {
@@ -14,8 +13,9 @@ public class Potion extends Item {
     }
 
     @Override
-    public void function(Actor target) {
-        target.gainHealth(100 + Main.RANDOM_SOURCE.nextInt(300));
+    public String function(Actor target) {
+        target.gainHealth(30);
+        return target.getName() + " uses a " + name + " and gains 30 health.";
     }
 
     @Override

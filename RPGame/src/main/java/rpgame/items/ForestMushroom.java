@@ -1,6 +1,5 @@
 package rpgame.items;
 
-import main.Main;
 import rpgame.creatures.Actor;
 
 public class ForestMushroom extends Item {
@@ -13,8 +12,9 @@ public class ForestMushroom extends Item {
     }
 
     @Override
-    public void function(Actor target) {
-        target.gainMana(300 + Main.RANDOM_SOURCE.nextInt(900));
+    public String function(Actor target) {
+        target.gainMana(60);
+        return target.getName() + " uses a " + name + " and gains 60 mana.";
     }
 
     @Override

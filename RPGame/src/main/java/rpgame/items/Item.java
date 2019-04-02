@@ -4,7 +4,7 @@ import rpgame.creatures.Actor;
 
 public abstract class Item implements Comparable<Item> {
 
-    public abstract void function(Actor target);
+    public abstract String function(Actor target);
 
     public abstract String getName();
 

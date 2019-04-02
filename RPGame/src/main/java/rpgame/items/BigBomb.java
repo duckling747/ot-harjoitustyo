@@ -1,6 +1,5 @@
 package rpgame.items;
 
-import main.Main;
 import rpgame.creatures.Actor;
 
 public class BigBomb extends Item {
@@ -8,13 +7,14 @@ public class BigBomb extends Item {
     private final String name, description;
 
     public BigBomb() {
-        this.name = "An extremely large bomb";
+        this.name = "Big Bomb";
         this.description = "Explodes horribly and damages things";
     }
 
     @Override
-    public void function(Actor target) {
-        target.loseHealth(300 + Main.RANDOM_SOURCE.nextInt(500));
+    public String function(Actor target) {
+        target.loseHealth(60);
+        return "A vicious opponent uses a " + name + " and " + target.getName() + " loses 60 health.";
     }
 
     @Override

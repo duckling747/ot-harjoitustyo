@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import main.Main;
 import rpgame.creatures.Monster;
+import rpgame.creatures.MonsterIndentities;
 
 public class BasicLevel extends Level {
 
     private final List<Monster> monsters;
-    private final int minLevel,
-            maxLevel;
+    private final int level;
 
-    public BasicLevel(String name, int min, int max) {
+    public BasicLevel(String name, int level) {
         super(name);
-        this.minLevel = min;
-        this.maxLevel = max;
+        this.level = level;
         monsters = new ArrayList<>();
         // get monsters in level range for list
         for (int i = 0; i < 10; i++) {
-            monsters.add(new Monster(Main.RANDOM_SOURCE.nextInt((max - min) + 1) + min));
+            level = level - 1 + Main.RANDOM_SOURCE.nextInt(3);
+            monsters.add(new Monster(level, MonsterIndentities.getMonsterName(level)));
         }
     }
 

@@ -5,29 +5,34 @@ import rpgame.items.ItemBag;
 
 public abstract class Actor {
 
+    private final String name;
+
+    private final double maxhealth;
+    private final double maxmana;
+
     private double currHealth;
     private double currMana;
 
-    private double maxhealth;
-    private double maxmana;
+    private double strength;
+    private double defense;
+    private double agility;
+    private double wisdom;
+    private double intelligence;
+    private double luck;
 
-    private int strength;
-    private int defense;
-    private int agility;
-    private int wisdom;
-    private int intelligence;
-    private int luck;
-
-    protected boolean defend = false;
-    protected boolean flee = false;
+    private boolean defend = false;
+    private boolean flee = false;
 
     private final ItemBag itemBag;
 
-    Actor(double maxhealth, double maxmana, int strength,
-            int defense, int agility, int wisdom,
-            int intelligence, int luck) {
+    Actor(String name, double maxhealth, double maxmana, double strength,
+            double defense, double agility, double wisdom,
+            double intelligence, double luck) {
+        this.name = name;
         this.maxhealth = maxhealth;
         this.maxmana = maxmana;
+        this.currHealth = maxhealth;
+        this.currMana = maxmana;
         this.strength = strength;
         this.defense = defense;
         this.agility = agility;
@@ -73,7 +78,7 @@ public abstract class Actor {
         return currHealth == 0;
     }
 
-    public abstract void attack(Actor target);
+    public abstract double attack();
 
     public abstract void defend();
 
@@ -87,88 +92,64 @@ public abstract class Actor {
         return currHealth;
     }
 
-    public void setCurrHealth(double currHealth) {
-        this.currHealth = currHealth;
-    }
-
     public double getCurrMana() {
         return currMana;
-    }
-
-    public void setCurrMana(double currMana) {
-        this.currMana = currMana;
     }
 
     public double getMaxhealth() {
         return maxhealth;
     }
 
-    public void setMaxhealth(double maxhealth) {
-        this.maxhealth = maxhealth;
-    }
-
     public double getMaxmana() {
         return maxmana;
     }
 
-    public void setMaxmana(double maxmana) {
-        this.maxmana = maxmana;
-    }
-
-    public int getStrength() {
+    public double getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
-    public int getDefense() {
+    public double getDefense() {
         return defense;
     }
 
-    public void setDefense(int defense) {
-        this.defense = defense;
-    }
-
-    public int getAgility() {
+    public double getAgility() {
         return agility;
     }
 
-    public void setAgility(int agility) {
-        this.agility = agility;
-    }
-
-    public int getWisdom() {
+    public double getWisdom() {
         return wisdom;
     }
 
-    public void setWisdom(int wisdom) {
-        this.wisdom = wisdom;
-    }
-
-    public int getIntelligence() {
+    public double getIntelligence() {
         return intelligence;
     }
 
-    public void setIntelligence(int intelligence) {
-        this.intelligence = intelligence;
-    }
-
-    public int getLuck() {
+    public double getLuck() {
         return luck;
-    }
-
-    public void setLuck(int luck) {
-        this.luck = luck;
     }
 
     public boolean isDefend() {
         return defend;
     }
 
+    public boolean isFlee() {
+        return flee;
+    }
+
+    public ItemBag getItemBag() {
+        return itemBag;
+    }
+
     public void setDefend(boolean defend) {
         this.defend = defend;
+    }
+
+    public void setFlee(boolean flee) {
+        this.flee = flee;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

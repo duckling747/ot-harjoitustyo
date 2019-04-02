@@ -7,30 +7,25 @@ public class WarriorCharacter extends Actor implements LevelUp {
 
     private int level;
 
-    public WarriorCharacter() {
+    public WarriorCharacter(String name) {
         // maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck
-        super(200, 10, 50, 20, 0, 0, 0, 5);
+        super(name, 100, 50, 0.5, 0.2, 0, 0, 0, 0.05);
         this.level = 1;
     }
 
     @Override
-    public void attack(Actor target) {
-        double amount = this.getStrength() * 1.5;
+    public double attack() {
+        double amount = this.getStrength() * 10;
         double criticalRand = Main.RANDOM_SOURCE.nextDouble();
-        if (super.getLuck() * 0.01 < criticalRand) {
+        if (super.getLuck() > criticalRand) {
             amount *= 2;
         }
-        if (target.defend) {
-            target.defend = false;
-            target.loseHealth(amount - amount * 0.01 * target.getDefense());
-        } else {
-            target.loseHealth(amount);
-        }
+        return amount;
     }
 
     @Override
     public void defend() {
-        super.defend = true;
+        super.setDefend(true);
     }
 
     @Override
@@ -46,7 +41,7 @@ public class WarriorCharacter extends Actor implements LevelUp {
     @Override
     public void flee() {
         if (Main.RANDOM_SOURCE.nextDouble() < 0.75) {
-            super.flee = true;
+            super.setFlee(true);
         }
     }
 

@@ -4,12 +4,12 @@ import rpgame.items.Item;
 
 public class ThiefCharacter extends Actor implements LevelUp {
 
-    public ThiefCharacter(double maxhealth, double maxmana, int strength, int defense, int agility, int wisdom, int intelligence, int luck) {
-        super(maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck);
+    public ThiefCharacter(String name, double maxhealth, double maxmana, int strength, int defense, int agility, int wisdom, int intelligence, int luck) {
+        super(name, maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck);
     }
 
     @Override
-    public void attack(Actor target) {
+    public double attack() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
