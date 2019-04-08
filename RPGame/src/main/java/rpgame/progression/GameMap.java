@@ -1,16 +1,15 @@
 package rpgame.progression;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class GameMap {
 
     private Level currentLevel;
 
-    private final HashMap<String, Level> levelMap;
+    private final Map<String, Level> levelMap;
 
     public GameMap() {
-        // set up levels
-        // update UI
         levelMap = new HashMap<>();
         initLevels();
         currentLevel = new FirstLevel();
@@ -22,9 +21,9 @@ public class GameMap {
         currentLevel = levelMap.get(name);
     }
 
-    private void initLevels() {
+    private static void initLevels() {
         // set up levels
-        
+
     }
 
     public String getCurrentLevelName() {

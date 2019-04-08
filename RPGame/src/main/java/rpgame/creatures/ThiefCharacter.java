@@ -4,8 +4,12 @@ import rpgame.items.Item;
 
 public class ThiefCharacter extends Actor implements LevelUp {
 
-    public ThiefCharacter(String name, double maxhealth, double maxmana, int strength, int defense, int agility, int wisdom, int intelligence, int luck) {
-        super(name, maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck);
+    private int level;
+    
+    public ThiefCharacter(String name) {
+        // maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck
+        super(name, 75, 30, 0.3, 0.3, 0.5, 0.2, 0.2, 0.05);
+        this.level = 1;
     }
 
     @Override

@@ -8,7 +8,7 @@ public class ItemRandomGetter {
 
     private static final List<Item> DROPPABLE_ITEMS = new ArrayList<>();
 
-    public static void setUpItemRandomGetter() {
+    public static void initItemRandomGetter() {
         DROPPABLE_ITEMS.add(new Bomb());
         DROPPABLE_ITEMS.add(new Potion());
         DROPPABLE_ITEMS.add(new ManaDrink());

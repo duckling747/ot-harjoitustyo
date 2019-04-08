@@ -4,8 +4,12 @@ import rpgame.items.Item;
 
 public class WizardCharacter extends Actor implements LevelUp {
 
-    public WizardCharacter(String name, double maxhealth, double maxmana, int strength, int defense, int agility, int wisdom, int intelligence, int luck) {
-        super(name,maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck);
+    private int level;
+
+    public WizardCharacter(String name) {
+        // maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck
+        super(name, 50, 100, 0.2, 0.2, 0.3, 0.5, 0.5, 0.05);
+        this.level = 1;
     }
 
     @Override

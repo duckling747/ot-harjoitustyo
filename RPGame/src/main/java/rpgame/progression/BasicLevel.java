@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import rpgame.main.Main;
 import rpgame.creatures.Monster;
-import rpgame.creatures.MonsterIndentities;
+import rpgame.creatures.MonsterIdentities;
 
 public class BasicLevel extends Level {
 
@@ -18,7 +18,7 @@ public class BasicLevel extends Level {
         // get monsters in level range for list
         for (int i = 0; i < 10; i++) {
             level = level - 1 + Main.RANDOM_SOURCE.nextInt(3);
-            monsters.add(new Monster(level, MonsterIndentities.getMonsterName(level)));
+            monsters.add(new Monster(level, MonsterIdentities.getMonsterName(level)));
         }
     }
 
