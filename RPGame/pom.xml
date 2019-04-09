@@ -35,7 +35,7 @@
                 <version>0.8.0</version>
                 <configuration>
                     <excludes>
-                        <exclude>rpgame/UI/*</exclude>
+                        <exclude>rpgame/ui/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
