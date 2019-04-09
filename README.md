@@ -8,6 +8,8 @@ Tämä on kurssin *Ohjelmistotuotanto* harjoitustyö. Tänne tulee kurssin laska
 
 [Työaikakirjanpito](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
 
+[Arkkitehtuurikuvaus](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/arkkitehtuuri.md)
+
 ## Komentorivi
 
 ### Testaus
