@@ -12,7 +12,7 @@ import rpgame.creatures.WarriorCharacter;
 import rpgame.items.Bomb;
 import rpgame.items.Potion;
 
-public class ItemTests {
+public class ItemTest {
 
     private Potion potion;
     private Bomb bomb;
