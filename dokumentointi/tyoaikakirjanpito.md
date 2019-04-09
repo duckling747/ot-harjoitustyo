@@ -8,4 +8,5 @@
 | 1.4. | 7     | JavaFX-kertausta, ensimmäiset UI-luokat, pelin rakenne alkaa materialisoitua |
 | 2.4. | 4 | Selkeämpi perustoiminnallisuus, taistelut, alustava UI-suunnittelu. Lisää luokkia. Ensimmäiset testit. |
 | 8.4. | 5 | Lisää UI-toiminnallisuutta, lisää JavaFX-kertausta |
-| yht   | 28   |  |
+| 9.4. | 10 | Lue koodi läpi, kirjoita uudelleen. Yksinkertaista. Selvennä |
+| yht   | 38   |  |
