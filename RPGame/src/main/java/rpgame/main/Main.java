@@ -2,7 +2,7 @@ package rpgame.main;
 
 import java.util.Random;
 import static javafx.application.Application.launch;
-import rpgame.UI.Menu;
+import rpgame.ui.Menu;
 
 public class Main {
 

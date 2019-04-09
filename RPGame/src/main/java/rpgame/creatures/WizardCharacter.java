@@ -2,24 +2,14 @@ package rpgame.creatures;
 
 import rpgame.items.Item;
 
-public class WizardCharacter extends Actor implements LevelUp {
+public final class WizardCharacter extends Actor implements LevelUp, ItemUser {
 
     private int level;
 
     public WizardCharacter(String name) {
         // maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck
-        super(name, 50, 100, 0.2, 0.2, 0.3, 0.5, 0.5, 0.05);
+        super(name, 50, 100, 0.0, 0.0, 0.2, 0.5, 0.5, 0.2);
         this.level = 1;
-    }
-
-    @Override
-    public double attack() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void defend() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -28,18 +18,13 @@ public class WizardCharacter extends Actor implements LevelUp {
     }
 
     @Override
-    public void useItem(Item item, Actor target) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void flee() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void levelUp() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void useItem(Item item, Actor target) {
+        item.function(target);
     }
 
 }

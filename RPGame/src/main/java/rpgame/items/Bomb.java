@@ -14,8 +14,8 @@ public class Bomb extends Item {
 
     @Override
     public String function(Actor target) {
-        target.loseHealth(60);
-        return "A vicious opponent uses a " + name + " and " + target.getName() + " loses 60 health.";
+        target.loseHealth(30);
+        return "A vicious opponent uses a " + name + " and " + target.getName() + " loses 30 health.";
     }
 
     @Override

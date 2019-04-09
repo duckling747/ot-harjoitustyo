@@ -13,7 +13,7 @@ public class AI {
         } else if (actionChancer < 0.8) {
             return Actions.FLEE;
         } else {
-            return Actions.USEITEM;
+            return Actions.SKILL;
         }
     }
 }

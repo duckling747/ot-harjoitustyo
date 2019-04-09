@@ -1,6 +1,5 @@
 package rpgame.creatures;
 
-import rpgame.items.Item;
 import rpgame.items.ItemBag;
 
 public abstract class Actor {
@@ -78,15 +77,23 @@ public abstract class Actor {
         return currHealth == 0;
     }
 
-    public abstract double attack();
+    public double attack(double criticalRand) {
+        double amount = this.strength * 10;
+        if (this.luck > criticalRand) {
+            amount *= 2;
+        }
+        return amount;
+    }
 
-    public abstract void defend();
+    public void defend() {
+        this.defend = true;
+    }
 
     public abstract void skill();
 
-    public abstract void useItem(Item item, Actor target);
-
-    public abstract void flee();
+    public void flee(double fleeRand) {
+        this.flee = fleeRand < 0.5;
+    }
 
     public double getCurrHealth() {
         return currHealth;

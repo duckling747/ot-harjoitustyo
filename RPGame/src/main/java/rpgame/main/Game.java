@@ -12,15 +12,24 @@ public class Game {
 
     public Game(Actor character) {
         this.character = character;
-        this.map = new GameMap();
+        this.map = new GameMap(character);
         MonsterIdentities.initMonsterNames();
         ItemRandomGetter.initItemRandomGetter();
     }
 
     public Game(Actor character, String levelName) {
         this.character = character;
-        this.map = new GameMap(levelName);
+        this.map = new GameMap(character, levelName);
         MonsterIdentities.initMonsterNames();
         ItemRandomGetter.initItemRandomGetter();
     }
+
+    public Actor getCharacter() {
+        return character;
+    }
+
+    public GameMap getMap() {
+        return map;
+    }
+
 }

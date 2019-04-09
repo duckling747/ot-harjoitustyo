@@ -22,34 +22,8 @@ public class Monster extends Actor {
     }
 
     @Override
-    public double attack() {
-        double amount = this.getStrength();
-        double criticalRand = Main.RANDOM_SOURCE.nextDouble();
-        if (super.getLuck() * 0.01 < criticalRand) {
-            amount *= 2;
-        }
-        return amount;
-    }
-
-    @Override
-    public void defend() {
-        super.setDefend(true);
-    }
-
-    @Override
     public void skill() {
-    }
 
-    @Override
-    public void useItem(Item item, Actor target) {
-        item.function(target);
-    }
-
-    @Override
-    public void flee() {
-        if (super.getCurrHealth() < super.getMaxhealth() * 0.05 || Main.RANDOM_SOURCE.nextDouble() < 0.75) {
-            super.setFlee(true);
-        }
     }
 
     public Item dropRandomItem() {

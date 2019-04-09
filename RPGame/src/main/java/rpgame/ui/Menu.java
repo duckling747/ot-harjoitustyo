@@ -1,4 +1,4 @@
-package rpgame.UI;
+package rpgame.ui;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import rpgame.creatures.Actor;
+import rpgame.creatures.MonsterIdentities;
 import rpgame.creatures.ThiefCharacter;
 import rpgame.creatures.WarriorCharacter;
 import rpgame.creatures.WizardCharacter;
@@ -39,6 +40,11 @@ public class Menu extends Application {
         primaryStage.setTitle("Roleplay NOW");
         primaryStage.setScene(getMainMenuScene(primaryStage));
         primaryStage.show();
+    }
+
+    @Override
+    public void init() {
+        MonsterIdentities.initMonsterImages();
     }
 
     private static Scene getMainMenuScene(Stage stage) {
@@ -198,7 +204,7 @@ public class Menu extends Application {
         VBox vboxLeft = new VBox();
         vboxLeft.setPrefHeight(HEIGHT / 2);//////////
         // IMAGE TODO: set image based on character
-        ImageView playerImage = new ImageView(new Image("file:src/main/resources/warrior_Xena.jpeg"));
+        ImageView playerImage = new ImageView(new Image("file:src/main/resources/warrior_stock.jpeg"));
         playerImage.setFitHeight(HEIGHT / 4);
         playerImage.setFitWidth(WIDTH / 4);
         vboxLeft.getChildren().add(playerImage);
@@ -211,7 +217,7 @@ public class Menu extends Application {
         // right
         VBox vboxRight = new VBox();
         vboxRight.setPrefHeight(HEIGHT / 2);////////
-        ImageView monsterImage = new ImageView(new Image("file:src/main/resources/cliche_monster.jpeg"));
+        ImageView monsterImage = new ImageView(new Image("file:src/main/resources/monster_gorillaish.jpeg"));
         monsterImage.setFitHeight(HEIGHT / 4);
         monsterImage.setFitWidth(WIDTH / 4);
         vboxRight.getChildren().add(monsterImage);

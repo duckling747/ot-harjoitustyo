@@ -17,14 +17,18 @@ public class BasicLevel extends Level {
         monsters = new ArrayList<>();
         // get monsters in level range for list
         for (int i = 0; i < 10; i++) {
-            level = level - 1 + Main.RANDOM_SOURCE.nextInt(3);
-            monsters.add(new Monster(level, MonsterIdentities.getMonsterName(level)));
+            monsters.add(new Monster(level - 1 + Main.RANDOM_SOURCE.nextInt(3),
+                    MonsterIdentities.getMonsterName(level)));
         }
     }
 
     public Monster getMonster() {
         // return to the relevant UI method to get battle view with the monster selected
         return monsters.get(Main.RANDOM_SOURCE.nextInt(monsters.size()));
+    }
+
+    public int getLevel() {
+        return level;
     }
 
 }

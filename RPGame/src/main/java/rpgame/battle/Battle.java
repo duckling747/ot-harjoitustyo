@@ -4,7 +4,6 @@ import rpgame.main.Main;
 import rpgame.creatures.Actor;
 import rpgame.creatures.Monster;
 import rpgame.items.Item;
-import rpgame.items.Potion;
 
 public class Battle {
 
@@ -24,7 +23,7 @@ public class Battle {
     }
 
     public void attacks(Actor attacker, Actor attackee) {
-        double damage = attacker.attack();
+        double damage = attacker.attack(Main.RANDOM_SOURCE.nextDouble());
         if (attackee.isDefend()) {
             attackee.setDefend(false);
             damage = (1 - attackee.getDefense()) * damage;
@@ -46,7 +45,7 @@ public class Battle {
     }
 
     public void flees(Actor fleer) {
-        fleer.flee();
+        fleer.flee(Main.RANDOM_SOURCE.nextDouble());
         if (fleer.isFlee()) {
             turnout = String.format("%s flees.", fleer.getName());
         } else {
@@ -61,15 +60,19 @@ public class Battle {
     /**
      *
      */
-    public void opponentTurn() {
+    public boolean deathHappens() {
         if (player.dies()) {
             turnout = String.format("%s dies.", player.getName());
-            return;
+            return true;
         }
         if (opponent.dies()) {
             turnout = String.format("%s dies.", opponent.getName());
-            return;
+            return true;
         }
+        return false;
+    }
+
+    public void opponentTurn() {
         if (!playerTurn) {
             Actions action = AI.selectAction();
             switch (action) {
@@ -81,10 +84,6 @@ public class Battle {
                     break;
                 case FLEE:
                     flees(opponent);
-                    break;
-                case USEITEM:
-                    opponent.useItem(new Potion(), opponent);
-                    turnout = String.format("%s uses a potion.", opponent.getName());
                     break;
             }
         }

@@ -15,9 +15,4 @@ public abstract class Item implements Comparable<Item> {
         return this.getName().compareTo(o.getName());
     }
 
-    @Override
-    public String toString() {
-        return "Item{" + "name=" + getName() + ", description=" + getDescription() + '}';
-    }
-
 }
