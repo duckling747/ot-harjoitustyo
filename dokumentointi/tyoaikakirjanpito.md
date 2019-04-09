@@ -7,4 +7,5 @@
 | 31.3. | 4    | lisää suunnittelua ja luokkien mietintää, pyrkimyksiä pitää rakenne yksinkertaisena |
 | 1.4. | 7     | JavaFX-kertausta, ensimmäiset UI-luokat, pelin rakenne alkaa materialisoitua |
 | 2.4. | 4 | Selkeämpi perustoiminnallisuus, taistelut, alustava UI-suunnittelu. Lisää luokkia. Ensimmäiset testit. |
-| yht   | 23   |  |
+| 8.4. | 5 | Lisää UI-toiminnallisuutta, lisää JavaFX-kertausta |
+| yht   | 28   |  |
