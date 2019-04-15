@@ -10,7 +10,7 @@ public class Monster extends Actor {
 
     public Monster(int level, String name) {
         // double maxhealth, double maxmana, int strength, int defense, int agility, int wisdom, int intelligence, int luck
-        super(name, 20 + Main.RANDOM_SOURCE.nextInt(level * 3 + 1),
+        super(name, "monster", 20 + Main.RANDOM_SOURCE.nextInt(level * 3 + 1),
                 20 + Main.RANDOM_SOURCE.nextInt(level * 3 + 1),
                 Main.RANDOM_SOURCE.nextInt(10 * level + 1) / 100.0,
                 Main.RANDOM_SOURCE.nextInt(10 * level + 1) / 100.0,

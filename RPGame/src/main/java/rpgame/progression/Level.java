@@ -8,10 +8,12 @@ public abstract class Level {
 
     private final Map<String, Level> children;
     private final String name;
+    private final boolean isStory;
 
-    public Level(String name) {
+    public Level(String name, boolean isStory) {
         this.children = new HashMap<>();
         this.name = name;
+        this.isStory = isStory;
     }
 
     public String getName() {
@@ -28,6 +30,10 @@ public abstract class Level {
 
     public Level getChild(String name) {
         return children.get(name);
+    }
+    
+    public boolean getIsStory() {
+        return isStory;
     }
 
     @Override

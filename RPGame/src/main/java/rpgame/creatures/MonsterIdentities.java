@@ -63,8 +63,8 @@ public final class MonsterIdentities {
         return lv8to10Monsters;
     }
 
-    public static HashMap<String, Image> getMonsterImages() {
-        return monsterImages;
+    public static Image getMonsterImage(String name) {
+        return monsterImages.get(name);
     }
 
 }

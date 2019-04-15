@@ -12,7 +12,7 @@ public class BasicLevel extends Level {
     private final int level;
 
     public BasicLevel(String name, int level) {
-        super(name);
+        super(name, false);
         this.level = level;
         monsters = new ArrayList<>();
         // get monsters in level range for list
@@ -23,7 +23,6 @@ public class BasicLevel extends Level {
     }
 
     public Monster getMonster() {
-        // return to the relevant UI method to get battle view with the monster selected
         return monsters.get(Main.RANDOM_SOURCE.nextInt(monsters.size()));
     }
 

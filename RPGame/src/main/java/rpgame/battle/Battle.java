@@ -5,10 +5,11 @@ import rpgame.creatures.Actor;
 import rpgame.creatures.Monster;
 import rpgame.items.Item;
 
-public class Battle {
+public final class Battle {
 
-    private Actor player;
-    private Monster opponent;
+    private final Actor player;
+    private final Monster opponent;
+    
     private boolean playerTurn;
     private String turnout;
 
@@ -92,5 +93,9 @@ public class Battle {
 
     public String getTurnout() {
         return turnout;
+    }
+    
+    public String getMonsterName() {
+        return opponent.getName();
     }
 }

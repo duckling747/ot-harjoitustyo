@@ -22,17 +22,20 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import rpgame.battle.Battle;
 import rpgame.creatures.Actor;
 import rpgame.creatures.MonsterIdentities;
 import rpgame.creatures.ThiefCharacter;
 import rpgame.creatures.WarriorCharacter;
 import rpgame.creatures.WizardCharacter;
-import rpgame.main.Game;
+import rpgame.items.ItemRandomGetter;
+import rpgame.progression.Game;
 
 public class Menu extends Application {
 
     private static final int WIDTH = 600, HEIGHT = 400;
     private static final Font TITLE_FONTS = Font.font("Tahoma", 30);
+
     private static Game game;
 
     @Override
@@ -44,7 +47,9 @@ public class Menu extends Application {
 
     @Override
     public void init() {
+        MonsterIdentities.initMonsterNames();
         MonsterIdentities.initMonsterImages();
+        ItemRandomGetter.initItemRandomGetter();
     }
 
     private static Scene getMainMenuScene(Stage stage) {
@@ -100,7 +105,7 @@ public class Menu extends Application {
 //        BorderPane.setAlignment(leftpane, Pos.CENTER);
 
         // right
-        ImageView image = new ImageView(new Image("file:src/main/resources/bavaria.jpeg"));
+        ImageView image = new ImageView(new Image("file:src/main/resources/scenery/bavaria.jpeg"));
         image.setFitHeight(HEIGHT / 2);
         image.setFitWidth(WIDTH / 2);
         pane.setRight(image);
@@ -175,21 +180,25 @@ public class Menu extends Application {
                     return;
                 case "Warrior":
                     character = new WarriorCharacter(textfieldName.getText());
+                    game = new Game(character);
                     break;
                 case "Wizard":
                     character = new WizardCharacter(textfieldName.getText());
+                    game = new Game(character);
                     break;
                 case "Thief":
                     character = new ThiefCharacter(textfieldName.getText());
+                    game = new Game(character);
                     break;
             }
-            game = new Game(character);
             stage.setScene(getBattleScene(stage));
         });
         return makeSelectionsScene;
     }
 
     private static Scene getBattleScene(Stage stage) {
+        Battle b = game.getNextBattle();
+
         BorderPane bp = new BorderPane();
         bp.setPrefSize(WIDTH, HEIGHT);
         Scene battleScene = new Scene(bp);
@@ -204,43 +213,111 @@ public class Menu extends Application {
         VBox vboxLeft = new VBox();
         vboxLeft.setPrefHeight(HEIGHT / 2);//////////
         // IMAGE TODO: set image based on character
-        ImageView playerImage = new ImageView(new Image("file:src/main/resources/warrior_stock.jpeg"));
+        ImageView playerImage;
+        switch (game.getCharacterType()) {
+            case "warrior":
+                playerImage = new ImageView(new Image("file:src/main/resources/playerCharacters/warrior_stock.jpeg"));
+                break;
+            case "thief":
+                playerImage = new ImageView(new Image("file:src/main/resources/playerCharacters/thief_stock.jpeg"));
+                break;
+            case "wizard":
+                playerImage = new ImageView(new Image("file:src/main/resources/playerCharacters/wizard_stock.jpeg"));
+                break;
+            default:
+                throw new IllegalStateException();
+        }
         playerImage.setFitHeight(HEIGHT / 4);
         playerImage.setFitWidth(WIDTH / 4);
         vboxLeft.getChildren().add(playerImage);
         ProgressBar healthMeter = new ProgressBar(1.0);
+        healthMeter.setPrefWidth(WIDTH / 4);
         healthMeter.setStyle("-fx-accent: red;");
         ProgressBar manaMeter = new ProgressBar(1.0);
+        manaMeter.setPrefWidth(WIDTH / 4);
         vboxLeft.getChildren().add(healthMeter);
         vboxLeft.getChildren().add(manaMeter);
         bp.setLeft(vboxLeft);
         // right
         VBox vboxRight = new VBox();
         vboxRight.setPrefHeight(HEIGHT / 2);////////
-        ImageView monsterImage = new ImageView(new Image("file:src/main/resources/monster_gorillaish.jpeg"));
-        monsterImage.setFitHeight(HEIGHT / 4);
-        monsterImage.setFitWidth(WIDTH / 4);
-        vboxRight.getChildren().add(monsterImage);
-        ProgressBar monsHealthMeter = new ProgressBar(1.0);
-        monsHealthMeter.setStyle("-fx-accent: red;");
-        ProgressBar monsManaMeter = new ProgressBar(1.0);
-        vboxRight.getChildren().add(monsHealthMeter);
-        vboxRight.getChildren().add(monsManaMeter);
+        ImageView rightImage;
+        if (game.currentLevelIsStoryInstance()) {
+            switch (game.getCurrentLevelName()) {
+                case "Introduction":
+                    rightImage = new ImageView(game.getLevelImage("Introduction"));
+                    break;
+                case "Magic Forest":
+                    rightImage = new ImageView(game.getLevelImage("Magic Forest"));
+                    break;
+                case "More story":
+                    rightImage = new ImageView(game.getLevelImage("More story"));
+                    break;
+                case "Mystical swamp":
+                    rightImage = new ImageView(game.getLevelImage("Mystical swamp"));
+                    break;
+                default:
+                    throw new IllegalStateException();
+            }
+        } else {
+            rightImage = new ImageView(MonsterIdentities.getMonsterImage(b.getMonsterName()));
+        }
+        rightImage.setFitHeight(HEIGHT / 4);
+        rightImage.setFitWidth(WIDTH / 4);
+        vboxRight.getChildren().add(rightImage);
+        if (!game.currentLevelIsStoryInstance()) {
+            ProgressBar monsHealthMeter = new ProgressBar(1.0);
+            monsHealthMeter.setPrefWidth(WIDTH / 4);
+            monsHealthMeter.setStyle("-fx-accent: red;");
+            ProgressBar monsManaMeter = new ProgressBar(1.0);
+            monsManaMeter.setPrefWidth(WIDTH / 4);
+            vboxRight.getChildren().add(monsHealthMeter);
+            vboxRight.getChildren().add(monsManaMeter);
+        } else {
+            Label labLevelName = new Label(game.getCurrentLevelName());
+            vboxRight.getChildren().add(labLevelName);
+        }
         bp.setRight(vboxRight);
         //center
+        Button bNext = new Button("next");
         Button bAttack = new Button("attack");
         Button bDefend = new Button("defend");
         Button bItem = new Button("use item");
         Button bFlee = new Button("flee");
+        bNext.setPrefWidth(WIDTH / 5);
+        bNext.setOnAction(action -> {
+
+        });
         bAttack.setPrefWidth(WIDTH / 5);
+        bAttack.setOnAction(action -> {
+
+        });
         bDefend.setPrefWidth(WIDTH / 5);
+        bDefend.setOnAction(action -> {
+
+        });
         bItem.setPrefWidth(WIDTH / 5);
+        bItem.setOnAction(action -> {
+
+        });
         bFlee.setPrefWidth(WIDTH / 5);
-        bAttack.setDisable(true);
-        bDefend.setDisable(true);
-        bItem.setDisable(true);
-        bFlee.setDisable(true);
-        VBox vboxCenter = new VBox(bAttack, bDefend, bItem, bFlee);
+        bFlee.setOnAction(action -> {
+
+        });
+        if (game.currentLevelIsStoryInstance()) {
+            bNext.setDisable(false);
+            bAttack.setDisable(true);
+            bDefend.setDisable(true);
+            bItem.setDisable(true);
+            bFlee.setDisable(true);
+        } else {
+            bNext.setDisable(true);
+            bAttack.setDisable(false);
+            bDefend.setDisable(false);
+            bItem.setDisable(false);
+            bFlee.setDisable(false);
+        }
+        VBox vboxCenter = new VBox(bNext, bAttack, bDefend, bItem, bFlee);
         vboxCenter.setPrefHeight(HEIGHT / 2);
         vboxCenter.setAlignment(Pos.CENTER);
         bp.setCenter(vboxCenter);

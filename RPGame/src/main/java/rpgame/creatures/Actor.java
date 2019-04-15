@@ -5,6 +5,7 @@ import rpgame.items.ItemBag;
 public abstract class Actor {
 
     private final String name;
+    private final String type;
 
     private final double maxhealth;
     private final double maxmana;
@@ -24,10 +25,11 @@ public abstract class Actor {
 
     private final ItemBag itemBag;
 
-    Actor(String name, double maxhealth, double maxmana, double strength,
+    Actor(String name, String type, double maxhealth, double maxmana, double strength,
             double defense, double agility, double wisdom,
             double intelligence, double luck) {
         this.name = name;
+        this.type = type;
         this.maxhealth = maxhealth;
         this.maxmana = maxmana;
         this.currHealth = maxhealth;
@@ -157,6 +159,34 @@ public abstract class Actor {
 
     public String getName() {
         return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setStrength(double strength) {
+        this.strength = strength;
+    }
+
+    public void setDefense(double defense) {
+        this.defense = defense;
+    }
+
+    public void setAgility(double agility) {
+        this.agility = agility;
+    }
+
+    public void setWisdom(double wisdom) {
+        this.wisdom = wisdom;
+    }
+
+    public void setIntelligence(double intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public void setLuck(double luck) {
+        this.luck = luck;
     }
 
 }
