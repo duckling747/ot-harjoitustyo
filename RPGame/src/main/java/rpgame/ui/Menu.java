@@ -23,8 +23,8 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import rpgame.battle.Battle;
-import rpgame.creatures.Actor;
 import rpgame.creatures.MonsterIdentities;
+import rpgame.creatures.PlayerCharacter;
 import rpgame.creatures.ThiefCharacter;
 import rpgame.creatures.WarriorCharacter;
 import rpgame.creatures.WizardCharacter;
@@ -38,10 +38,13 @@ public class Menu extends Application {
 
     private static Game game;
 
+    static Stage stage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Roleplay NOW");
-        primaryStage.setScene(getMainMenuScene(primaryStage));
+        stage = primaryStage;
+        primaryStage.setScene(getMainMenuScene());
         primaryStage.show();
     }
 
@@ -52,7 +55,7 @@ public class Menu extends Application {
         ItemRandomGetter.initItemRandomGetter();
     }
 
-    private static Scene getMainMenuScene(Stage stage) {
+    private static Scene getMainMenuScene() {
         BorderPane pane = new BorderPane();
         pane.setPrefSize(WIDTH, HEIGHT);
         Scene mainMenuScene = new Scene(pane);
@@ -73,16 +76,15 @@ public class Menu extends Application {
         Insets insets = new Insets(10);
         buttonBegin.setPadding(insets);
         buttonBegin.setOnAction(e -> {
-            // handle starting new game and change scene to level selection scene
             Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Start a new game? ", ButtonType.YES, ButtonType.CANCEL);
             a.showAndWait();
             if (a.getResult() != ButtonType.YES) {
                 return;
             }
-            stage.setScene(getStartSceneLoading());
+            Menu.stage.setScene(getStartSceneLoading());
             PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(x -> {
-                stage.setScene(getStartScreenSelections(stage));
+                Menu.stage.setScene(getStartScreenSelections());
             });
             pause.play();
         });
@@ -118,7 +120,7 @@ public class Menu extends Application {
         BorderPane bp = new BorderPane();
         bp.setPrefSize(WIDTH, HEIGHT);
         Scene startingScene = new Scene(bp);
-        Label header = new Label("Starting up...");
+        Label header = new Label("Loading...");
         header.setFont(TITLE_FONTS);
         header.setPadding(new Insets(30, 30, 0, 30));
         bp.setCenter(header);
@@ -126,7 +128,7 @@ public class Menu extends Application {
         return startingScene;
     }
 
-    private static Scene getStartScreenSelections(Stage stage) {
+    private static Scene getStartScreenSelections() {
         VBox vboxSelContainer = new VBox();
         vboxSelContainer.setPrefSize(WIDTH, HEIGHT);
         vboxSelContainer.setAlignment(Pos.CENTER);
@@ -172,7 +174,7 @@ public class Menu extends Application {
                 a.showAndWait();
                 return;
             }
-            Actor character;
+            PlayerCharacter character;
             switch (((RadioButton) toggleCharType.getSelectedToggle()).getText()) {
                 default:
                     Alert a = new Alert(Alert.AlertType.ERROR, "Error in character creation (no selection) ");
@@ -191,12 +193,12 @@ public class Menu extends Application {
                     game = new Game(character);
                     break;
             }
-            stage.setScene(getBattleScene(stage));
+            stage.setScene(getBattleScene());
         });
         return makeSelectionsScene;
     }
 
-    private static Scene getBattleScene(Stage stage) {
+    private static Scene getBattleScene() {
         Battle b = game.getNextBattle();
 
         BorderPane bp = new BorderPane();
@@ -204,9 +206,15 @@ public class Menu extends Application {
         Scene battleScene = new Scene(bp);
         // top
         TextArea textAreaEvents = new TextArea();
+        textAreaEvents.setWrapText(true);
+        textAreaEvents.setEditable(false);
+        if (game.currentLevelIsStoryInstance()) {
+            textAreaEvents.setText(game.getNextStoryText());
+        } else {
+            textAreaEvents.setText(b.getTurnout());
+        }
         textAreaEvents.setPrefWidth(WIDTH - 10);
         textAreaEvents.setMaxHeight(HEIGHT / 2);
-        textAreaEvents.setEditable(false);
         //ScrollPane textPane = new ScrollPane(textFlowEvents);
         bp.setTop(textAreaEvents);
         // left
@@ -265,12 +273,12 @@ public class Menu extends Application {
         rightImage.setFitHeight(HEIGHT / 4);
         rightImage.setFitWidth(WIDTH / 4);
         vboxRight.getChildren().add(rightImage);
+        ProgressBar monsHealthMeter = new ProgressBar(1.0);
+        monsHealthMeter.setPrefWidth(WIDTH / 4);
+        ProgressBar monsManaMeter = new ProgressBar(1.0);
+        monsHealthMeter.setStyle("-fx-accent: red;");
+        monsManaMeter.setPrefWidth(WIDTH / 4);
         if (!game.currentLevelIsStoryInstance()) {
-            ProgressBar monsHealthMeter = new ProgressBar(1.0);
-            monsHealthMeter.setPrefWidth(WIDTH / 4);
-            monsHealthMeter.setStyle("-fx-accent: red;");
-            ProgressBar monsManaMeter = new ProgressBar(1.0);
-            monsManaMeter.setPrefWidth(WIDTH / 4);
             vboxRight.getChildren().add(monsHealthMeter);
             vboxRight.getChildren().add(monsManaMeter);
         } else {
@@ -286,23 +294,37 @@ public class Menu extends Application {
         Button bFlee = new Button("flee");
         bNext.setPrefWidth(WIDTH / 5);
         bNext.setOnAction(action -> {
-
+            String text = game.getNextStoryText();
+            textAreaEvents.setText(text);
+            if (text == null) {
+                game.advanceLevel();
+                stage.setScene(getStartSceneLoading());
+                PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                pause.setOnFinished(x -> {
+                    stage.setScene(getBattleScene());
+                });
+                pause.play();
+            }
         });
         bAttack.setPrefWidth(WIDTH / 5);
         bAttack.setOnAction(action -> {
-
+            b.attacks(true);
+            textAreaEvents.setText(b.getTurnout());
+            monsHealthMeter.setProgress(b.getMonsterHealthRatio());
         });
         bDefend.setPrefWidth(WIDTH / 5);
         bDefend.setOnAction(action -> {
-
+            b.defends(true);
         });
         bItem.setPrefWidth(WIDTH / 5);
         bItem.setOnAction(action -> {
-
+            // TODO: set item usage based on selection
+            // (and add selection component to UI)
+            // b.playerUseItem(item);
         });
         bFlee.setPrefWidth(WIDTH / 5);
         bFlee.setOnAction(action -> {
-
+            b.flees(true);
         });
         if (game.currentLevelIsStoryInstance()) {
             bNext.setDisable(false);

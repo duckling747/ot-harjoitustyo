@@ -1,17 +1,15 @@
 package rpgame.progression;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public abstract class Level {
 
-    private final Map<String, Level> children;
+    private Level nextLevel;
+
     private final String name;
     private final boolean isStory;
 
     public Level(String name, boolean isStory) {
-        this.children = new HashMap<>();
         this.name = name;
         this.isStory = isStory;
     }
@@ -20,18 +18,14 @@ public abstract class Level {
         return name;
     }
 
-    public void addChild(Level child) {
-        this.children.put(child.name, child);
+    public Level getNextLevel() {
+        return nextLevel;
     }
 
-    public Map<String, Level> getChildren() {
-        return children;
+    public void setNextLevel(Level nextLevel) {
+        this.nextLevel = nextLevel;
     }
 
-    public Level getChild(String name) {
-        return children.get(name);
-    }
-    
     public boolean getIsStory() {
         return isStory;
     }

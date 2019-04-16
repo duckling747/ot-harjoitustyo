@@ -3,27 +3,31 @@ package rpgame.battle;
 import rpgame.main.Main;
 import rpgame.creatures.Actor;
 import rpgame.creatures.Monster;
+import rpgame.creatures.PlayerCharacter;
 import rpgame.items.Item;
 
 public final class Battle {
 
-    private final Actor player;
+    private final PlayerCharacter player;
     private final Monster opponent;
-    
+
     private boolean playerTurn;
     private String turnout;
 
-    public Battle(Actor player, Monster opponent) {
+    public Battle(PlayerCharacter player, Monster opponent) {
         this.player = player;
         this.opponent = opponent;
         this.playerTurn = Main.RANDOM_SOURCE.nextBoolean();
+        this.turnout = "A(n) " + opponent.getName() + " approaches! ";
     }
 
     public boolean getPlayerTurn() {
         return playerTurn;
     }
 
-    public void attacks(Actor attacker, Actor attackee) {
+    public void attacks(boolean isPlayer) {
+        Actor attacker = (isPlayer) ? player : opponent,
+                attackee = (isPlayer) ? opponent : player;
         double damage = attacker.attack(Main.RANDOM_SOURCE.nextDouble());
         if (attackee.isDefend()) {
             attackee.setDefend(false);
@@ -40,12 +44,14 @@ public final class Battle {
         }
     }
 
-    public void defends(Actor defender) {
+    public void defends(boolean isPlayer) {
+        Actor defender = (isPlayer) ? player : opponent;
         defender.defend();
         turnout = String.format("%s defends.", defender.getName());
     }
 
-    public void flees(Actor fleer) {
+    public void flees(boolean isPlayer) {
+        Actor fleer = (isPlayer) ? player : opponent;
         fleer.flee(Main.RANDOM_SOURCE.nextDouble());
         if (fleer.isFlee()) {
             turnout = String.format("%s flees.", fleer.getName());
@@ -78,13 +84,13 @@ public final class Battle {
             Actions action = AI.selectAction();
             switch (action) {
                 case ATTACK:
-                    attacks(opponent, player);
+                    attacks(false);
                     break;
                 case DEFEND:
-                    defends(opponent);
+                    defends(false);
                     break;
                 case FLEE:
-                    flees(opponent);
+                    flees(false);
                     break;
             }
         }
@@ -94,8 +100,24 @@ public final class Battle {
     public String getTurnout() {
         return turnout;
     }
-    
+
     public String getMonsterName() {
         return opponent.getName();
+    }
+    
+    public double getMonsterManaRatio() {
+        return opponent.getCurrMana() / opponent.getMaxmana();
+    }
+    
+    public double getMonsterHealthRatio() {
+        return opponent.getCurrHealth() / opponent.getMaxhealth();
+    }
+    
+    public double getPlayerHealthRatio() {
+        return player.getCurrHealth() / player.getMaxhealth();
+    }
+    
+    public double getPlayerManaRatio() {
+        return player.getCurrMana() / player.getMaxmana();
     }
 }

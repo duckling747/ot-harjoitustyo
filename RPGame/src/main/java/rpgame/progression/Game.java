@@ -4,16 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.image.Image;
 import rpgame.battle.Battle;
-import rpgame.creatures.Actor;
+import rpgame.creatures.PlayerCharacter;
 
 public class Game {
 
     private Level currentLevel;
-    private final Actor character;
+    private final PlayerCharacter character;
     private final Map<String, Level> levelMap;
     private final Map<String, Image> levelImages;
 
-    public Game(Actor character) {
+    public Game(PlayerCharacter character) {
         levelMap = new HashMap<>();
         levelImages = new HashMap<>();
         this.character = character;
@@ -22,7 +22,7 @@ public class Game {
         currentLevel = levelMap.get("Introduction");
     }
 
-    public Game(Actor character, String name) {
+    public Game(PlayerCharacter character, String name) {
         levelMap = new HashMap<>();
         levelImages = new HashMap<>();
         this.character = character;
@@ -41,6 +41,9 @@ public class Game {
         levelMap.put("Magic Forest", l2);
         levelMap.put("More story", l3);
         levelMap.put("Mystical swamp", l4);
+        l1.setNextLevel(l2);
+        l2.setNextLevel(l3);
+        l3.setNextLevel(l4);
     }
 
     private void initImages() {
@@ -62,14 +65,8 @@ public class Game {
         return currentLevel.getIsStory();
     }
 
-    public boolean advanceLevel(String nextLevelName) {
-        if (currentLevel.getChildren().isEmpty()) {
-            return false;
-        } else if (!currentLevel.getChildren().containsKey(nextLevelName)) {
-            throw new IllegalArgumentException();
-        }
-        currentLevel = currentLevel.getChild(nextLevelName);
-        return true;
+    public boolean advanceLevel() {
+        return (currentLevel = currentLevel.getNextLevel()) != null;
     }
 
     public Battle getNextBattle() {
@@ -77,6 +74,13 @@ public class Game {
             return null;
         }
         return new Battle(character, ((BasicLevel) currentLevel).getMonster());
+    }
+
+    public String getNextStoryText() {
+        if (!currentLevelIsStoryInstance()) {
+            return null;
+        }
+        return ((StoryInstance) currentLevel).getNextStoryText();
     }
 
     public String getCharacterName() {
