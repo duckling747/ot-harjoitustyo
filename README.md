@@ -10,6 +10,9 @@ Tämä on kurssin *Ohjelmistotuotanto* harjoitustyö. Tänne tulee kurssin laska
 
 [Arkkitehtuurikuvaus](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/arkkitehtuuri.md)
 
+## Releaset
+[Viikko 5](https://github.com/duckling747/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Komentorivi
 
 ### Testaus
@@ -28,6 +31,14 @@ Testikattavuusraportin saa luotua komennolla
 mvn jacoco:report
 ```
 Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
+
+### Suoritettavan jarin generointi
+
+Komento
+
+```
+mvn package
+```
 
 ### Checkstyle
 

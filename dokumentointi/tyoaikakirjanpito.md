@@ -9,4 +9,6 @@
 | 2.4. | 4 | Selkeämpi perustoiminnallisuus, taistelut, alustava UI-suunnittelu. Lisää luokkia. Ensimmäiset testit. |
 | 8.4. | 5 | Lisää UI-toiminnallisuutta, lisää JavaFX-kertausta |
 | 9.4. | 10 | Lue koodi läpi, kirjoita uudelleen. Yksinkertaista. Selvennä |
-| yht   | 38   |  |
+| 15.4. | 5 | Kirjoita UI-toiminnallisuutta eteenpäin, viimeistele roolien erot. |
+| 16.4. | 12 | Selvennä lisää, tee etenemisestä järkevämpää, tee taistelut toimiviksi. Järkevöitä muutakin toiminnallisuutta. Tee release ja lisää testejä ym. ym. |
+| yht   | 55   |  |
