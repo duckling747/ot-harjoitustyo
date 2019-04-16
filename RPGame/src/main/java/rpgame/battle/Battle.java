@@ -19,6 +19,8 @@ public final class Battle {
         this.opponent = opponent;
         this.playerTurn = Main.RANDOM_SOURCE.nextBoolean();
         this.turnout = "A(n) " + opponent.getName() + " approaches! ";
+        this.player.gainHealth(player.getMaxhealth());
+        this.player.gainMana(player.getMaxmana());
     }
 
     public boolean getPlayerTurn() {
@@ -64,16 +66,25 @@ public final class Battle {
         turnout = String.format("%s uses a %s.", player.getName(), item.getName());
     }
 
+    public void usesSkill(boolean isPlayer) {
+        Actor skillUser = (isPlayer) ? player : opponent;
+        skillUser.skill();
+        turnout = String.format("%s uses a skill.", skillUser.getName());
+    }
+
     /**
      *
      */
-    public boolean deathHappens() {
+    public boolean endBattle() {
         if (player.dies()) {
             turnout = String.format("%s dies.", player.getName());
             return true;
         }
         if (opponent.dies()) {
             turnout = String.format("%s dies.", opponent.getName());
+            return true;
+        }
+        if (player.isFlee() || opponent.isFlee()) {
             return true;
         }
         return false;
@@ -85,6 +96,9 @@ public final class Battle {
             switch (action) {
                 case ATTACK:
                     attacks(false);
+                    break;
+                case SKILL:
+                    usesSkill(false);
                     break;
                 case DEFEND:
                     defends(false);
@@ -104,19 +118,19 @@ public final class Battle {
     public String getMonsterName() {
         return opponent.getName();
     }
-    
+
     public double getMonsterManaRatio() {
         return opponent.getCurrMana() / opponent.getMaxmana();
     }
-    
+
     public double getMonsterHealthRatio() {
         return opponent.getCurrHealth() / opponent.getMaxhealth();
     }
-    
+
     public double getPlayerHealthRatio() {
         return player.getCurrHealth() / player.getMaxhealth();
     }
-    
+
     public double getPlayerManaRatio() {
         return player.getCurrMana() / player.getMaxmana();
     }

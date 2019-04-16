@@ -294,16 +294,42 @@ public class Menu extends Application {
         Button bFlee = new Button("flee");
         bNext.setPrefWidth(WIDTH / 5);
         bNext.setOnAction(action -> {
-            String text = game.getNextStoryText();
-            textAreaEvents.setText(text);
-            if (text == null) {
-                game.advanceLevel();
-                stage.setScene(getStartSceneLoading());
-                PauseTransition pause = new PauseTransition(Duration.seconds(1));
-                pause.setOnFinished(x -> {
+            if (game.currentLevelIsStoryInstance()) {
+                String text = game.getNextStoryText();
+                textAreaEvents.setText(text);
+                if (text == null) {
+                    game.advanceLevel();
+                    stage.setScene(getStartSceneLoading());
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1));
+                    pause.setOnFinished(x -> {
+                        stage.setScene(getBattleScene());
+                    });
+                    pause.play();
+                }
+            } else {
+                b.opponentTurn();
+                textAreaEvents.setText(b.getTurnout());
+                healthMeter.setProgress(b.getPlayerHealthRatio());
+                manaMeter.setProgress(b.getPlayerManaRatio());
+                bNext.setDisable(true);
+                bAttack.setDisable(false);
+                bDefend.setDisable(false);
+                bItem.setDisable(false);
+                bFlee.setDisable(false);
+                if (!b.endBattle()) {
+                    return;
+                }
+                textAreaEvents.setText(b.getTurnout());
+                Alert a;
+                if (b.getPlayerHealthRatio() > 0) {
+                    a = new Alert(Alert.AlertType.NONE, "Opponent flees! Success. ", ButtonType.OK);
+                    a.showAndWait();
                     stage.setScene(getBattleScene());
-                });
-                pause.play();
+                } else {
+                    a = new Alert(Alert.AlertType.NONE, "You died! Failure. ", ButtonType.OK);
+                    a.showAndWait();
+                    stage.setScene(getMainMenuScene());
+                }
             }
         });
         bAttack.setPrefWidth(WIDTH / 5);
@@ -311,6 +337,19 @@ public class Menu extends Application {
             b.attacks(true);
             textAreaEvents.setText(b.getTurnout());
             monsHealthMeter.setProgress(b.getMonsterHealthRatio());
+            bNext.setDisable(false);
+            bAttack.setDisable(true);
+            bDefend.setDisable(true);
+            bItem.setDisable(true);
+            bFlee.setDisable(true);
+            if (!b.endBattle()) {
+                b.opponentTurn();
+                return;
+            }
+            textAreaEvents.setText(b.getTurnout());
+            Alert a = new Alert(Alert.AlertType.NONE, "Opponent is conquered! Success", ButtonType.OK);
+            a.showAndWait();
+            stage.setScene(getBattleScene());
         });
         bDefend.setPrefWidth(WIDTH / 5);
         bDefend.setOnAction(action -> {
