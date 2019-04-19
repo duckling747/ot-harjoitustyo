@@ -11,4 +11,5 @@
 | 9.4. | 10 | Lue koodi läpi, kirjoita uudelleen. Yksinkertaista. Selvennä |
 | 15.4. | 5 | Kirjoita UI-toiminnallisuutta eteenpäin, viimeistele roolien erot. |
 | 16.4. | 12 | Selvennä lisää, tee etenemisestä järkevämpää, tee taistelut toimiviksi. Järkevöitä muutakin toiminnallisuutta. Tee release ja lisää testejä ym. ym. |
-| yht   | 55   |  |
+| 19.4. | 1 | Päivitä määrittelydokumentti enemmän realistiseksi ja korjaa luokkakaavio ajantasaiseksi ja fiksuksi |
+| yht   | 56   |  |

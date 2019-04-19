@@ -23,8 +23,6 @@ public abstract class Actor {
     private boolean defend = false;
     private boolean flee = false;
 
-    private final ItemBag itemBag;
-
     Actor(String name, String type, double maxhealth, double maxmana, double strength,
             double defense, double agility, double wisdom,
             double intelligence, double luck) {
@@ -40,7 +38,6 @@ public abstract class Actor {
         this.wisdom = wisdom;
         this.intelligence = intelligence;
         this.luck = luck;
-        this.itemBag = new ItemBag();
     }
 
     public void loseHealth(double amount) {
@@ -143,10 +140,6 @@ public abstract class Actor {
 
     public boolean isFlee() {
         return flee;
-    }
-
-    public ItemBag getItemBag() {
-        return itemBag;
     }
 
     public void setDefend(boolean defend) {

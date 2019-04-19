@@ -1,17 +1,22 @@
 package rpgame.creatures;
 
 import rpgame.items.Item;
+import rpgame.items.ItemBag;
 
 public abstract class PlayerCharacter extends Actor implements LevelUp, ItemUser {
 
     private static final double MAX_ATTR = 1.0;
     private static final int MAX_LV = 10;
 
+    private final ItemBag itemBag;
+
     private int level = 1;
     private int exp = 0;
 
     public PlayerCharacter(String name, String type, double maxhealth, double maxmana, double strength, double defense, double agility, double wisdom, double intelligence, double luck) {
         super(name, type, maxhealth, maxmana, strength, defense, agility, wisdom, intelligence, luck);
+        this.itemBag = new ItemBag();
+
     }
 
     public void increaseExp() {
@@ -51,7 +56,12 @@ public abstract class PlayerCharacter extends Actor implements LevelUp, ItemUser
 
     @Override
     public void useItem(Item item, Actor target) {
+        //TODO: check if in item bag
         item.function(target);
+    }
+
+    public ItemBag getItemBag() {
+        return itemBag;
     }
 
 }

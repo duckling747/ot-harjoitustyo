@@ -230,12 +230,6 @@ public class MonsterTest {
     }
 
     @Test
-    public void getItemBagReturnsItemBag() {
-        ItemBag b = monster.getItemBag();
-        assertThat(b, instanceOf(ItemBag.class));
-    }
-
-    @Test
     public void dropRandomItemReturnsItem() {
         ItemRandomGetter.initItemRandomGetter();
         Item i = ((Monster) monster).dropRandomItem();
