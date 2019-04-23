@@ -21,6 +21,8 @@ public final class Battle {
         this.turnout = "A(n) " + opponent.getName() + " approaches! ";
         this.player.gainHealth(player.getMaxhealth());
         this.player.gainMana(player.getMaxmana());
+        this.player.setFlee(false);
+        this.player.setDefend(false);
     }
 
     public boolean getPlayerTurn() {
@@ -84,29 +86,45 @@ public final class Battle {
             turnout = String.format("%s dies.", opponent.getName());
             return true;
         }
-        if (player.isFlee() || opponent.isFlee()) {
+        if (player.isFlee()) {
+            turnout = String.format("%s flees.", player.getName());
+            return true;
+        }
+        if (opponent.isFlee()) {
+            turnout = String.format("%s flees.", opponent.getName());
             return true;
         }
         return false;
     }
 
     public void opponentTurn() {
-        if (!playerTurn) {
-            Actions action = AI.selectAction();
-            switch (action) {
-                case ATTACK:
-                    attacks(false);
-                    break;
-                case SKILL:
-                    usesSkill(false);
-                    break;
-                case DEFEND:
-                    defends(false);
-                    break;
-                case FLEE:
-                    flees(false);
-                    break;
-            }
+        if (playerTurn) {
+            return;
+        }
+        Actions action = AI.selectAction();
+        switch (action) {
+            case ATTACK:
+                attacks(false);
+                break;
+            case SKILL:
+                usesSkill(false);
+                break;
+            case DEFEND:
+                defends(false);
+                break;
+            case FLEE:
+                flees(false);
+                break;
+        }
+    }
+
+    public void changeTurn() {
+        if (playerTurn) {
+            opponent.setDefend(false);
+            opponent.setFlee(false);
+        } else {
+            player.setDefend(false);
+            player.setFlee(false);
         }
         playerTurn = !playerTurn;
     }

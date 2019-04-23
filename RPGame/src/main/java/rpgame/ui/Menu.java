@@ -308,6 +308,7 @@ public class Menu extends Application {
                 }
             } else {
                 b.opponentTurn();
+                b.changeTurn();
                 textAreaEvents.setText(b.getTurnout());
                 healthMeter.setProgress(b.getPlayerHealthRatio());
                 manaMeter.setProgress(b.getPlayerManaRatio());
@@ -343,7 +344,7 @@ public class Menu extends Application {
             bItem.setDisable(true);
             bFlee.setDisable(true);
             if (!b.endBattle()) {
-                b.opponentTurn();
+                b.changeTurn();
                 return;
             }
             textAreaEvents.setText(b.getTurnout());
@@ -354,6 +355,13 @@ public class Menu extends Application {
         bDefend.setPrefWidth(WIDTH / 5);
         bDefend.setOnAction(action -> {
             b.defends(true);
+            textAreaEvents.setText(b.getTurnout());
+            bNext.setDisable(false);
+            bAttack.setDisable(true);
+            bDefend.setDisable(true);
+            bItem.setDisable(true);
+            bFlee.setDisable(true);
+            b.changeTurn();
         });
         bItem.setPrefWidth(WIDTH / 5);
         bItem.setOnAction(action -> {
@@ -364,6 +372,20 @@ public class Menu extends Application {
         bFlee.setPrefWidth(WIDTH / 5);
         bFlee.setOnAction(action -> {
             b.flees(true);
+            textAreaEvents.setText(b.getTurnout());
+            bNext.setDisable(false);
+            bAttack.setDisable(true);
+            bDefend.setDisable(true);
+            bItem.setDisable(true);
+            bFlee.setDisable(true);
+            if (!b.endBattle()) {
+                b.changeTurn();
+                return;
+            }
+            textAreaEvents.setText(b.getTurnout());
+            Alert a = new Alert(Alert.AlertType.NONE, "You flee! Success", ButtonType.OK);
+            a.showAndWait();
+            stage.setScene(getBattleScene());
         });
         if (game.currentLevelIsStoryInstance()) {
             bNext.setDisable(false);
