@@ -37,6 +37,7 @@ public class Menu extends Application {
     private static final Font TITLE_FONTS = Font.font("Tahoma", 30);
 
     private static Game game;
+    private static int battleCounter = 0;
 
     static Stage stage;
 
@@ -199,8 +200,15 @@ public class Menu extends Application {
     }
 
     private static Scene getBattleScene() {
+        if (!game.currentLevelIsStoryInstance() && game.getCurrentLevelBattleMaximum() <= battleCounter) {
+            battleCounter = 0;
+            game.advanceLevel();
+        }
+        if (game.getCurrentLevelName() == null) {
+            stage.setScene(getMainMenuScene());
+        }
         Battle b = game.getNextBattle();
-
+        
         BorderPane bp = new BorderPane();
         bp.setPrefSize(WIDTH, HEIGHT);
         Scene battleScene = new Scene(bp);
@@ -324,6 +332,7 @@ public class Menu extends Application {
                 Alert a;
                 if (b.getPlayerHealthRatio() > 0) {
                     a = new Alert(Alert.AlertType.NONE, "Opponent flees! Success. ", ButtonType.OK);
+                    battleCounter++;
                     a.showAndWait();
                     stage.setScene(getBattleScene());
                 } else {
@@ -349,6 +358,7 @@ public class Menu extends Application {
             }
             textAreaEvents.setText(b.getTurnout());
             Alert a = new Alert(Alert.AlertType.NONE, "Opponent is conquered! Success", ButtonType.OK);
+            battleCounter++;
             a.showAndWait();
             stage.setScene(getBattleScene());
         });
@@ -384,16 +394,18 @@ public class Menu extends Application {
             }
             textAreaEvents.setText(b.getTurnout());
             Alert a = new Alert(Alert.AlertType.NONE, "You flee! Success", ButtonType.OK);
+            battleCounter++;
             a.showAndWait();
             stage.setScene(getBattleScene());
         });
-        if (game.currentLevelIsStoryInstance()) {
+        if (game.currentLevelIsStoryInstance()
+                || (!game.currentLevelIsStoryInstance() && !b.getPlayerTurn())) {
             bNext.setDisable(false);
             bAttack.setDisable(true);
             bDefend.setDisable(true);
             bItem.setDisable(true);
             bFlee.setDisable(true);
-        } else {
+        } else if (b.getPlayerTurn()) {
             bNext.setDisable(true);
             bAttack.setDisable(false);
             bDefend.setDisable(false);

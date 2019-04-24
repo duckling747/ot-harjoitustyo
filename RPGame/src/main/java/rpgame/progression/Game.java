@@ -33,24 +33,36 @@ public class Game {
 
     private void initLevels() {
         // set up levels
-        Level l1 = new FirstStory("Introduction", character.getName(), character.getType());
-        Level l2 = new BasicLevel("Magic Forest", 1);
-        Level l3 = new SecondStory("More story", character.getName());
-        Level l4 = new BasicLevel("Mystical swamp", 3);
+        Level l1 = new FirstStory("Introduction", character.getName(), character.getType()),
+                l2 = new BasicLevel("Magic Forest", 1),
+                l3 = new SecondStory("More story", character.getName()),
+                l4 = new BasicLevel("Mystical Swamp", 5),
+                l5 = new ThirdStory("The Dragon", character.getName()),
+                l6 = new BasicLevel("Magic Tower", 8),
+                l7 = new FourthStory("Final Dialogue Stuff", character.getName()),
+                l8 = new BossLevel();
         levelMap.put("Introduction", l1);
         levelMap.put("Magic Forest", l2);
         levelMap.put("More story", l3);
         levelMap.put("Mystical swamp", l4);
+        levelMap.put("The Dragon", l5);
+        levelMap.put("Magic Tower", l6);
+        levelMap.put("Final Dialogue Stuff", l7);
+        levelMap.put("Boss", l8);
         l1.setNextLevel(l2);
         l2.setNextLevel(l3);
         l3.setNextLevel(l4);
+        l4.setNextLevel(l5);
+        l5.setNextLevel(l6);
+        l6.setNextLevel(l7);
+        l7.setNextLevel(l8);
     }
 
     private void initImages() {
         levelImages.put("Introduction", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
         levelImages.put("Magic Forest", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
         levelImages.put("More story", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
-        levelImages.put("Mystical swamp", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
+        levelImages.put("Mystical Swamp", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
     }
 
     public Image getLevelImage(String name) {
@@ -89,6 +101,13 @@ public class Game {
 
     public String getCharacterType() {
         return character.getType();
+    }
+
+    public int getCurrentLevelBattleMaximum() {
+        if (currentLevel.getIsStory()) {
+            return 0;
+        }
+        return ((BasicLevel) currentLevel).getHowManyConsecutiveBattles();
     }
 
 }

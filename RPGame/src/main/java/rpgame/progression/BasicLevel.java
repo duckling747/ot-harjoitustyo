@@ -10,6 +10,7 @@ public class BasicLevel extends Level {
 
     private final List<Monster> monsters;
     private final int level;
+    private final int howManyConsequentBattles;
 
     public BasicLevel(String name, int level) {
         super(name, false);
@@ -20,6 +21,7 @@ public class BasicLevel extends Level {
             monsters.add(new Monster(level - 1 + Main.RANDOM_SOURCE.nextInt(3),
                     MonsterIdentities.getMonsterName(level)));
         }
+        howManyConsequentBattles = 5 + Main.RANDOM_SOURCE.nextInt(6);
     }
 
     public Monster getMonster() {
@@ -28,6 +30,10 @@ public class BasicLevel extends Level {
 
     public int getLevel() {
         return level;
+    }
+    
+    public int getHowManyConsecutiveBattles() {
+        return howManyConsequentBattles;
     }
 
 }

@@ -12,4 +12,6 @@
 | 15.4. | 5 | Kirjoita UI-toiminnallisuutta eteenpäin, viimeistele roolien erot. |
 | 16.4. | 12 | Selvennä lisää, tee etenemisestä järkevämpää, tee taistelut toimiviksi. Järkevöitä muutakin toiminnallisuutta. Tee release ja lisää testejä ym. ym. |
 | 19.4. | 1 | Päivitä määrittelydokumentti enemmän realistiseksi ja korjaa luokkakaavio ajantasaiseksi ja fiksuksi |
-| yht   | 56   |  |
+| 24.4 | 1 | Pikkupäivitys koodiin |
+| 25.4 | 2 | Perus load/save -toiminnallisuusrunko ja pikkupäivityksiä |
+| yht   | 59   |  |
