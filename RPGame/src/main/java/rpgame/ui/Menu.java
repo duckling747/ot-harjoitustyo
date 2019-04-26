@@ -38,6 +38,7 @@ public class Menu extends Application {
 
     private static Game game;
     private static int battleCounter = 0;
+    private static MonsterIdentities monsIdent;
 
     static Stage stage;
 
@@ -51,12 +52,12 @@ public class Menu extends Application {
 
     @Override
     public void init() {
-        MonsterIdentities.initMonsterNames();
-        MonsterIdentities.initMonsterImages();
+        monsIdent = new MonsterIdentities();
+        monsIdent.initMonsterImages();
         ItemRandomGetter.initItemRandomGetter();
     }
 
-    private static Scene getMainMenuScene() {
+    private Scene getMainMenuScene() {
         BorderPane pane = new BorderPane();
         pane.setPrefSize(WIDTH, HEIGHT);
         Scene mainMenuScene = new Scene(pane);
@@ -108,7 +109,7 @@ public class Menu extends Application {
 //        BorderPane.setAlignment(leftpane, Pos.CENTER);
 
         // right
-        ImageView image = new ImageView(new Image("file:src/main/resources/scenery/bavaria.jpeg"));
+        ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/scenery/bavaria.jpeg")));
         image.setFitHeight(HEIGHT / 2);
         image.setFitWidth(WIDTH / 2);
         pane.setRight(image);
@@ -117,7 +118,7 @@ public class Menu extends Application {
         return mainMenuScene;
     }
 
-    private static Scene getStartSceneLoading() {
+    private Scene getStartSceneLoading() {
         BorderPane bp = new BorderPane();
         bp.setPrefSize(WIDTH, HEIGHT);
         Scene startingScene = new Scene(bp);
@@ -129,7 +130,7 @@ public class Menu extends Application {
         return startingScene;
     }
 
-    private static Scene getStartScreenSelections() {
+    private Scene getStartScreenSelections() {
         VBox vboxSelContainer = new VBox();
         vboxSelContainer.setPrefSize(WIDTH, HEIGHT);
         vboxSelContainer.setAlignment(Pos.CENTER);
@@ -199,7 +200,7 @@ public class Menu extends Application {
         return makeSelectionsScene;
     }
 
-    private static Scene getBattleScene() {
+    private Scene getBattleScene() {
         if (!game.currentLevelIsStoryInstance() && game.getCurrentLevelBattleMaximum() <= battleCounter) {
             battleCounter = 0;
             game.advanceLevel();
@@ -208,7 +209,7 @@ public class Menu extends Application {
             stage.setScene(getMainMenuScene());
         }
         Battle b = game.getNextBattle();
-        
+
         BorderPane bp = new BorderPane();
         bp.setPrefSize(WIDTH, HEIGHT);
         Scene battleScene = new Scene(bp);
@@ -232,13 +233,13 @@ public class Menu extends Application {
         ImageView playerImage;
         switch (game.getCharacterType()) {
             case "warrior":
-                playerImage = new ImageView(new Image("file:src/main/resources/playerCharacters/warrior_stock.jpeg"));
+                playerImage = new ImageView(new Image(getClass().getResourceAsStream("/playerCharacters/warrior_stock.jpeg")));
                 break;
             case "thief":
-                playerImage = new ImageView(new Image("file:src/main/resources/playerCharacters/thief_stock.jpeg"));
+                playerImage = new ImageView(new Image(getClass().getResourceAsStream("/playerCharacters/thief_stock.jpeg")));
                 break;
             case "wizard":
-                playerImage = new ImageView(new Image("file:src/main/resources/playerCharacters/wizard_stock.jpeg"));
+                playerImage = new ImageView(new Image(getClass().getResourceAsStream("/playerCharacters/wizard_stock.jpeg")));
                 break;
             default:
                 throw new IllegalStateException();
@@ -263,14 +264,14 @@ public class Menu extends Application {
                 case "Introduction":
                     rightImage = new ImageView(game.getLevelImage("Introduction"));
                     break;
-                case "Magic Forest":
-                    rightImage = new ImageView(game.getLevelImage("Magic Forest"));
-                    break;
                 case "More story":
                     rightImage = new ImageView(game.getLevelImage("More story"));
                     break;
-                case "Mystical swamp":
-                    rightImage = new ImageView(game.getLevelImage("Mystical swamp"));
+                case "The Dragon":
+                    rightImage = new ImageView(game.getLevelImage("The Dragon"));
+                    break;
+                case "Final Dialogue":
+                    rightImage = new ImageView(game.getLevelImage("Final Dialogue"));
                     break;
                 default:
                     throw new IllegalStateException();

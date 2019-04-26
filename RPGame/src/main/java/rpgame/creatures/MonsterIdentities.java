@@ -13,7 +13,7 @@ public final class MonsterIdentities {
     private static List<String> lv8to10Monsters;
     private static HashMap<String, Image> monsterImages;
 
-    public static void initMonsterNames() {
+    public MonsterIdentities() {
         lv1to3Monsters = new ArrayList<>();
         lv4to7Monsters = new ArrayList<>();
         lv8to10Monsters = new ArrayList<>();
@@ -28,17 +28,17 @@ public final class MonsterIdentities {
         lv8to10Monsters.add("Saturday Night Drunkard");
     }
 
-    public static void initMonsterImages() {
+    public void initMonsterImages() {
         monsterImages = new HashMap<>(lv1to3Monsters.size() + lv4to7Monsters.size() + lv8to10Monsters.size());
-        monsterImages.put("Rat", new Image("file:src/main/resources/monsters/monster_rat.jpeg"));
-        monsterImages.put("Wolf", new Image("file:src/main/resources/monsters/monster_wolf.jpeg"));
-        monsterImages.put("Amoeba", new Image("file:src/main/resources/monsters/monster_amoeba.jpeg"));
-        monsterImages.put("Eagle", new Image("file:src/main/resources/monsters/monster_bird.jpeg"));
-        monsterImages.put("Bear", new Image("file:src/main/resources/monsters/monster_bear.jpeg"));
-        monsterImages.put("Angry Bear", new Image("file:src/main/resources/monsters/monster_bear_angry.jpeg"));
-        monsterImages.put("Garuda", new Image("file:src/main/resources/monsters/monster_garuda.jpeg"));
-        monsterImages.put("Saturday Night Drunkard", new Image("file:src/main/resources/monsters/monster_scary.jpeg"));
-        monsterImages.put("White Gorilla Creature", new Image("file:src/main/resources/monsters/monster_gorillaish.jpeg"));
+        monsterImages.put("Rat", new Image(getClass().getResourceAsStream("/monsters/monster_rat.jpeg")));
+        monsterImages.put("Wolf", new Image(getClass().getResourceAsStream("/monsters/monster_wolf.jpeg")));
+        monsterImages.put("Amoeba", new Image(getClass().getResourceAsStream("/monsters/monster_amoeba.jpeg")));
+        monsterImages.put("Eagle", new Image(getClass().getResourceAsStream("/monsters/monster_bird.jpeg")));
+        monsterImages.put("Bear", new Image(getClass().getResourceAsStream("/monsters/monster_bear.jpeg")));
+        monsterImages.put("Angry Bear", new Image(getClass().getResourceAsStream("/monsters/monster_bear_angry.jpeg")));
+        monsterImages.put("Garuda", new Image(getClass().getResourceAsStream("/monsters/monster_garuda.jpeg")));
+        monsterImages.put("Saturday Night Drunkard", new Image(getClass().getResourceAsStream("/monsters/monster_scary.jpeg")));
+        monsterImages.put("White Gorilla Creature", new Image(getClass().getResourceAsStream("/monsters/monster_gorillaish.jpeg")));
     }
 
     public static String getMonsterName(int level) {

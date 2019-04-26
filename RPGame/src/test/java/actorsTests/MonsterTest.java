@@ -113,17 +113,19 @@ public class MonsterTest {
 
     @Test
     public void monsterAttackDamageCorrect() {
-        if (monster.getStrength() == 0) {
-            return;
-        }
         double atk = monster.attack(0.5);
         if (monster.getLuck() > 0.5) {
             assertTrue(atk == monster.getStrength() * 20);
         } else {
             assertTrue(atk == monster.getStrength() * 10);
         }
-        assertTrue(monster.attack(1) == monster.getStrength() * 10
-                && monster.attack(0) == monster.getStrength() * 20);
+        if (monster.getLuck() > 0) {
+            assertTrue(monster.attack(1) == monster.getStrength() * 10
+                    && monster.attack(0) == monster.getStrength() * 20);
+        } else {
+            assertTrue(monster.attack(1) == monster.getStrength() * 10
+                    && monster.attack(0) == monster.getStrength() * 10);
+        }
     }
 
     @Test

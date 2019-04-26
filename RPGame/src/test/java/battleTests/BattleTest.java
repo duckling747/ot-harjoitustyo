@@ -62,17 +62,6 @@ public class BattleTest {
     }
 
     @Test
-    public void playerTurnChangesWithOpponentTurn() {
-        boolean t = battle.getPlayerTurn();
-        battle.opponentTurn();
-        boolean t2 = battle.getPlayerTurn();
-        assertTrue(t != t2);
-        battle.opponentTurn();
-        t = battle.getPlayerTurn();
-        assertTrue(t != t2);
-    }
-
-    @Test
     public void monsterNameCorrect() {
         String s = battle.getMonsterName();
         assertTrue(s.equals("Steve"));
@@ -121,17 +110,6 @@ public class BattleTest {
         assertTrue(battle.endBattle());
     }
 
-    @Test
-    public void turnoutChangesWithOpponentTurnPreciselyOnceEveryTwoMethodCalls() {
-        String s1 = battle.getTurnout();
-        battle.opponentTurn();
-        String s2 = battle.getTurnout();
-        battle.opponentTurn();
-        String s3 = battle.getTurnout();
-        assertTrue(s1.equals(s2) && !s2.equals(s3)
-                || !s1.equals(s2) && s2.equals(s3));
-    }
-    
     @Test
     public void healthAndManaRatiosAreBetweenLimits() {
         Random r = new Random();

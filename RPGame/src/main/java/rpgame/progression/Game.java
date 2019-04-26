@@ -39,7 +39,7 @@ public class Game {
                 l4 = new BasicLevel("Mystical Swamp", 5),
                 l5 = new ThirdStory("The Dragon", character.getName()),
                 l6 = new BasicLevel("Magic Tower", 8),
-                l7 = new FourthStory("Final Dialogue Stuff", character.getName()),
+                l7 = new FourthStory("Final Dialogue", character.getName()),
                 l8 = new BossLevel();
         levelMap.put("Introduction", l1);
         levelMap.put("Magic Forest", l2);
@@ -47,7 +47,7 @@ public class Game {
         levelMap.put("Mystical swamp", l4);
         levelMap.put("The Dragon", l5);
         levelMap.put("Magic Tower", l6);
-        levelMap.put("Final Dialogue Stuff", l7);
+        levelMap.put("Final Dialogue", l7);
         levelMap.put("Boss", l8);
         l1.setNextLevel(l2);
         l2.setNextLevel(l3);
@@ -59,10 +59,10 @@ public class Game {
     }
 
     private void initImages() {
-        levelImages.put("Introduction", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
-        levelImages.put("Magic Forest", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
-        levelImages.put("More story", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
-        levelImages.put("Mystical Swamp", new Image("file:src/main/resources/scenery/stock_forest.jpeg"));
+        levelImages.put("Introduction", new Image(getClass().getResourceAsStream("/scenery/stock_forest.jpeg")));
+        levelImages.put("More story", new Image(getClass().getResourceAsStream("/scenery/stock_forest.jpeg")));
+        levelImages.put("The Dragon", new Image(getClass().getResourceAsStream("/scenery/stock_forest.jpeg")));
+        levelImages.put("Final Dialogue", new Image(getClass().getResourceAsStream("/scenery/stock_forest.jpeg")));
     }
 
     public Image getLevelImage(String name) {
