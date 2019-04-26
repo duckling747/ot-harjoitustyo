@@ -40,6 +40,14 @@ Komento
 mvn package
 ```
 
+### JavaDoc
+
+JavaDocsit saa aikaan komennolla
+```
+mvn javadoc:javadoc
+```
+JavaDocia voi tarkastella selaimella tiedostosta, joka sijaitsee polussa _target/site/apidocs/index.html_
+
 ### Checkstyle
 
 Tiedostoon [checkstyle.xml](https://github.com/mluukkai/OtmTodoApp/blob/master/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla

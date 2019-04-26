@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import rpgame.battle.Battle;
+import rpgame.creatures.Actor;
 import rpgame.creatures.Monster;
 import rpgame.creatures.PlayerCharacter;
 import rpgame.creatures.WarriorCharacter;
@@ -90,19 +91,19 @@ public class BattleTest {
         opponent.setFlee(true);
         assertTrue(battle.endBattle());
     }
-    
+
     @Test
     public void battleDoesNotEndWithoutDeathOrFlee() {
         assertTrue(!battle.endBattle());
     }
-    
+
     @Test
     public void battleEndsWithBothDead() {
         player.loseHealth(player.getMaxhealth());
         opponent.loseHealth(opponent.getMaxhealth());
         assertTrue(battle.endBattle());
     }
-    
+
     @Test
     public void battleEndsWithBothFlee() {
         player.setFlee(true);
@@ -136,6 +137,33 @@ public class BattleTest {
             player.gainMana(r.nextInt((int) player.getMaxmana()));
             double rat = battle.getPlayerManaRatio();
             assertTrue(rat >= 0.0 && rat <= 1.0);
+        }
+    }
+
+    @Test
+    public void changeTurnFunctionsCorrect() {
+        boolean b = battle.getPlayerTurn();
+        battle.changeTurn();
+        assertTrue(b != battle.getPlayerTurn());
+        if (battle.getPlayerTurn()) {
+            assertTrue(((Actor) player).isFlee() == false);
+            assertTrue(((Actor) player).isDefend() == false);
+        }
+    }
+
+    @Test
+    public void opponentTurnDoesNotWorkImproperly1() {
+        for (int i = 0; i < 100000; i++) {
+            if (battle.getPlayerTurn()) {
+                double hp = ((Actor) player).getCurrHealth();
+                battle.opponentTurn();
+                assertTrue(((Actor) player).getCurrHealth() == hp);
+            } else {
+                double hp = ((Actor) player).getCurrHealth();
+                battle.opponentTurn();
+                assertTrue(((Actor) player).getCurrHealth() <= hp);
+            }
+            battle.changeTurn();
         }
     }
 

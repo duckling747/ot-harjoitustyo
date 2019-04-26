@@ -135,7 +135,7 @@ public abstract class Actor {
 
     /**
      * Provides fleeing functionality
-     * @param fleeRand A double value between 0.0 and 1.0 (inclusive) that influences the change to succesfully flee
+     * @param fleeRand A double value between 0.0 and 1.0 (inclusive) that influences the chance to succesfully flee
      */
     public void flee(double fleeRand) {
         this.flee = fleeRand < 0.5;
