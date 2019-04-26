@@ -4,6 +4,8 @@ Tämä on kurssin *Ohjelmistotuotanto* harjoitustyö. Tänne tulee kurssin laska
 
 ## Dokumentaatio
 
+[Käyttöohje](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/kayttoohje.md)
+
 [Vaatimusmäärittely](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
