@@ -14,4 +14,5 @@
 | 19.4. | 1 | Päivitä määrittelydokumentti enemmän realistiseksi ja korjaa luokkakaavio ajantasaiseksi ja fiksuksi |
 | 24.4 | 1 | Pikkupäivitys koodiin |
 | 25.4 | 2 | Perus load/save -toiminnallisuusrunko ja pikkupäivityksiä |
-| yht   | 59   |  |
+| 26.4. | 8 | Kuvien lataus fiksummaksi, pelin eteneminen fiksummaksi, dokumentaatio |
+| yht   | Laske minut   |  |

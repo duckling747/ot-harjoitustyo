@@ -2,6 +2,9 @@ package rpgame.items;
 
 import rpgame.creatures.Actor;
 
+/**
+ * Abstract Item class for shared functionality between different items
+ */
 public abstract class Item implements Comparable<Item> {
 
     public abstract String function(Actor target);

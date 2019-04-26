@@ -2,8 +2,17 @@ package rpgame.battle;
 
 import rpgame.main.Main;
 
+
+/**
+ * Class provides functionality for the AI
+ * 
+ */
 public class AI {
 
+    /**
+     * 
+     * @return Which action the AI performs next
+     */
     public static Actions selectAction() {
         double actionChancer = Main.RANDOM_SOURCE.nextDouble();
         if (actionChancer < 0.5) {

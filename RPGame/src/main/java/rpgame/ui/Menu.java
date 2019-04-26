@@ -22,12 +22,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import jdk.nashorn.tools.Shell;
 import rpgame.battle.Battle;
 import rpgame.creatures.MonsterIdentities;
 import rpgame.creatures.PlayerCharacter;
 import rpgame.creatures.ThiefCharacter;
 import rpgame.creatures.WarriorCharacter;
 import rpgame.creatures.WizardCharacter;
+import rpgame.io.Io;
 import rpgame.items.ItemRandomGetter;
 import rpgame.progression.Game;
 
@@ -94,7 +96,9 @@ public class Menu extends Application {
         Button buttonLoad = new Button("Load Game");
         buttonLoad.setPadding(insets);
         buttonLoad.setOnAction(e -> {
-            // hande load game and change scene to level selection scene
+            if (Io.saveFileExists()) {
+                
+            }
         });
 
         Button buttonQuit = new Button("Quit Game");
@@ -106,7 +110,6 @@ public class Menu extends Application {
         leftpane.getChildren().addAll(buttonBegin, buttonLoad, buttonQuit);
         leftpane.setAlignment(Pos.CENTER);
         pane.setLeft(leftpane);
-//        BorderPane.setAlignment(leftpane, Pos.CENTER);
 
         // right
         ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/scenery/bavaria.jpeg")));
@@ -205,9 +208,6 @@ public class Menu extends Application {
             battleCounter = 0;
             game.advanceLevel();
         }
-        if (game.getCurrentLevelName() == null) {
-            stage.setScene(getMainMenuScene());
-        }
         Battle b = game.getNextBattle();
 
         BorderPane bp = new BorderPane();
@@ -224,12 +224,10 @@ public class Menu extends Application {
         }
         textAreaEvents.setPrefWidth(WIDTH - 10);
         textAreaEvents.setMaxHeight(HEIGHT / 2);
-        //ScrollPane textPane = new ScrollPane(textFlowEvents);
         bp.setTop(textAreaEvents);
         // left
         VBox vboxLeft = new VBox();
-        vboxLeft.setPrefHeight(HEIGHT / 2);//////////
-        // IMAGE TODO: set image based on character
+        vboxLeft.setPrefHeight(HEIGHT / 2);
         ImageView playerImage;
         switch (game.getCharacterType()) {
             case "warrior":
@@ -257,25 +255,10 @@ public class Menu extends Application {
         bp.setLeft(vboxLeft);
         // right
         VBox vboxRight = new VBox();
-        vboxRight.setPrefHeight(HEIGHT / 2);////////
+        vboxRight.setPrefHeight(HEIGHT / 2);
         ImageView rightImage;
         if (game.currentLevelIsStoryInstance()) {
-            switch (game.getCurrentLevelName()) {
-                case "Introduction":
-                    rightImage = new ImageView(game.getLevelImage("Introduction"));
-                    break;
-                case "More story":
-                    rightImage = new ImageView(game.getLevelImage("More story"));
-                    break;
-                case "The Dragon":
-                    rightImage = new ImageView(game.getLevelImage("The Dragon"));
-                    break;
-                case "Final Dialogue":
-                    rightImage = new ImageView(game.getLevelImage("Final Dialogue"));
-                    break;
-                default:
-                    throw new IllegalStateException();
-            }
+            rightImage = new ImageView(game.getLevelImage(game.getCurrentLevelName()));
         } else {
             rightImage = new ImageView(MonsterIdentities.getMonsterImage(b.getMonsterName()));
         }
@@ -307,7 +290,11 @@ public class Menu extends Application {
                 String text = game.getNextStoryText();
                 textAreaEvents.setText(text);
                 if (text == null) {
-                    game.advanceLevel();
+                    boolean success = game.advanceLevel();
+                    if (!success) {
+                        stage.setScene(getMainMenuScene());
+                        return;
+                    }
                     stage.setScene(getStartSceneLoading());
                     PauseTransition pause = new PauseTransition(Duration.seconds(1));
                     pause.setOnFinished(x -> {
@@ -376,9 +363,7 @@ public class Menu extends Application {
         });
         bItem.setPrefWidth(WIDTH / 5);
         bItem.setOnAction(action -> {
-            // TODO: set item usage based on selection
-            // (and add selection component to UI)
-            // b.playerUseItem(item);
+            // TODO: set item usage based on selection (and add selection component to UI)
         });
         bFlee.setPrefWidth(WIDTH / 5);
         bFlee.setOnAction(action -> {

@@ -21,7 +21,7 @@ public class BasicLevel extends Level {
             monsters.add(new Monster(level - 1 + Main.RANDOM_SOURCE.nextInt(3),
                     MonsterIdentities.getMonsterName(level)));
         }
-        howManyConsequentBattles = 5 + Main.RANDOM_SOURCE.nextInt(6);
+        howManyConsequentBattles = 3 + Main.RANDOM_SOURCE.nextInt(2);
     }
 
     public Monster getMonster() {

@@ -1,7 +1,5 @@
 package rpgame.creatures;
 
-import rpgame.items.ItemBag;
-
 public abstract class Actor {
 
     private final String name;
@@ -23,6 +21,20 @@ public abstract class Actor {
     private boolean defend = false;
     private boolean flee = false;
 
+    /**
+     * The class is an abstract representation of an acting entity during battles 
+     * in the game with different attributes that influence what he can do
+     * @param name
+     * @param type
+     * @param maxhealth
+     * @param maxmana
+     * @param strength
+     * @param defense
+     * @param agility
+     * @param wisdom
+     * @param intelligence
+     * @param luck 
+     */
     Actor(String name, String type, double maxhealth, double maxmana, double strength,
             double defense, double agility, double wisdom,
             double intelligence, double luck) {
@@ -40,6 +52,10 @@ public abstract class Actor {
         this.luck = luck;
     }
 
+    /**
+     * Provides health loss functionality
+     * @param amount Amount of health lost
+     */
     public void loseHealth(double amount) {
         if (currHealth - amount < 0) {
             currHealth = 0;
@@ -48,6 +64,10 @@ public abstract class Actor {
         }
     }
 
+    /**
+     * Provides health gain functionality
+     * @param amount Amount of health gained
+     */
     public void gainHealth(double amount) {
         if (currHealth + amount > maxhealth) {
             currHealth = maxhealth;
@@ -56,6 +76,10 @@ public abstract class Actor {
         }
     }
 
+    /**
+     * Provides mana loss functionality
+     * @param amount Amount of mana lost
+     */
     public void loseMana(double amount) {
         if (currMana - amount < 0) {
             currMana = 0;
@@ -64,6 +88,10 @@ public abstract class Actor {
         }
     }
 
+    /**
+     * Provides mana gain functionality
+     * @param amount Amount of mana gained
+     */
     public void gainMana(double amount) {
         if (currMana + amount > maxmana) {
             currMana = maxmana;
@@ -72,10 +100,19 @@ public abstract class Actor {
         }
     }
 
+    /**
+     * Check to see if this actor is dead
+     * @return boolean value of whether actor has 0 health
+     */
     public boolean dies() {
         return currHealth == 0;
     }
 
+    /**
+     * Provides attack functionality 
+     * @param criticalRand A double value between 0.0 and 1.0 (inclusive) that together with luck influences a chance to perform a critical hit with an attack
+     * @return Amount of damage the attack does
+     */
     public double attack(double criticalRand) {
         double amount = this.strength * 10;
         if (this.luck > criticalRand) {
@@ -84,12 +121,22 @@ public abstract class Actor {
         return amount;
     }
 
+    /**
+     * Provides defend functionality
+     */
     public void defend() {
         this.defend = true;
     }
 
+    /**
+     * Provides skill usage functionality. Needs to be overridden for each different character type
+     */
     public abstract void skill();
 
+    /**
+     * Provides fleeing functionality
+     * @param fleeRand A double value between 0.0 and 1.0 (inclusive) that influences the change to succesfully flee
+     */
     public void flee(double fleeRand) {
         this.flee = fleeRand < 0.5;
     }

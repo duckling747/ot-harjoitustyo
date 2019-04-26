@@ -9,7 +9,7 @@ public final class WizardCharacter extends PlayerCharacter {
 
     @Override
     public void skill() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // TODO Wizard specific skill implementation
     }
 
 }

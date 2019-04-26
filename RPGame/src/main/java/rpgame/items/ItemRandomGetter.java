@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import rpgame.main.Main;
 
-public class ItemRandomGetter {
+/**
+ * A utility class for getting random items from all the items in the game
+ */
+public final class ItemRandomGetter {
 
     private static final List<Item> DROPPABLE_ITEMS = new ArrayList<>();
 

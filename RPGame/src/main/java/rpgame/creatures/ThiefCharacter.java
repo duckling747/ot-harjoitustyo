@@ -9,7 +9,7 @@ public final class ThiefCharacter extends PlayerCharacter {
 
     @Override
     public void skill() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // TODO Thief specific skill implementation
     }
 
 }

@@ -2,6 +2,9 @@ package rpgame.progression;
 
 import java.util.Objects;
 
+/**
+ * An abstract method for the shared functionality of the different types of levels
+ */
 public abstract class Level {
 
     private Level nextLevel;

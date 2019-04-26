@@ -6,6 +6,11 @@ import rpgame.creatures.Monster;
 import rpgame.creatures.PlayerCharacter;
 import rpgame.items.Item;
 
+
+/**
+ * The class describes a battle and it's events as they play out
+ * 
+ */
 public final class Battle {
 
     private final PlayerCharacter player;
@@ -29,6 +34,10 @@ public final class Battle {
         return playerTurn;
     }
 
+    /**
+     * The method implements an attack functionality to a battle
+     * @param isPlayer Whether it is the player's turn
+     */
     public void attacks(boolean isPlayer) {
         Actor attacker = (isPlayer) ? player : opponent,
                 attackee = (isPlayer) ? opponent : player;
@@ -48,12 +57,20 @@ public final class Battle {
         }
     }
 
+    /**
+     * The method implements a defend functionality to a battle; what happens when an actor defends
+     * @param isPlayer Whether it is the player's turn
+     */
     public void defends(boolean isPlayer) {
         Actor defender = (isPlayer) ? player : opponent;
         defender.defend();
         turnout = String.format("%s defends.", defender.getName());
     }
 
+    /**
+     * The method implements a fleeing functionality; what happens when an actor decides to try to flee
+     * @param isPlayer Whether it is the players turn
+     */
     public void flees(boolean isPlayer) {
         Actor fleer = (isPlayer) ? player : opponent;
         fleer.flee(Main.RANDOM_SOURCE.nextDouble());
@@ -64,10 +81,18 @@ public final class Battle {
         }
     }
 
+    /**
+     * Implements an item usage situation in a battle
+     * @param item Item to be used
+     */
     public void playerUseItem(Item item) {
         turnout = String.format("%s uses a %s.", player.getName(), item.getName());
     }
 
+    /**
+     * Implements a skill usage situation in a battle
+     * @param isPlayer Whether it is the players turn
+     */
     public void usesSkill(boolean isPlayer) {
         Actor skillUser = (isPlayer) ? player : opponent;
         skillUser.skill();
@@ -75,7 +100,8 @@ public final class Battle {
     }
 
     /**
-     *
+     * Checks whether battle can end during the current turn
+     * @return If the battle ends or not
      */
     public boolean endBattle() {
         if (player.dies()) {
@@ -97,6 +123,10 @@ public final class Battle {
         return false;
     }
 
+    /**
+     * Implements the opponents action during a turn in battle
+     * @see rpgame.battle.AI#selectAction() 
+     */
     public void opponentTurn() {
         if (playerTurn) {
             return;
@@ -118,6 +148,9 @@ public final class Battle {
         }
     }
 
+    /**
+     * Changes the turn
+     */
     public void changeTurn() {
         if (playerTurn) {
             opponent.setDefend(false);
@@ -129,6 +162,10 @@ public final class Battle {
         playerTurn = !playerTurn;
     }
 
+    /**
+     * Returns a String representation of whatever happened during the last turn
+     * @return A String representation of the turnout
+     */
     public String getTurnout() {
         return turnout;
     }

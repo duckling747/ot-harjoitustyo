@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * A pseudo utility class for the items a player character has available
+ */
 public class ItemBag {
 
     private List<Item> items;

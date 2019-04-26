@@ -6,6 +6,9 @@ import java.util.List;
 import javafx.scene.image.Image;
 import rpgame.main.Main;
 
+/**
+ * Utility type class to pre-construct the different monsters for the game
+ */
 public final class MonsterIdentities {
 
     private static List<String> lv1to3Monsters;
@@ -28,6 +31,9 @@ public final class MonsterIdentities {
         lv8to10Monsters.add("Saturday Night Drunkard");
     }
 
+    /**
+     * Loads the monster images from resources and stores them in a map for use
+     */
     public void initMonsterImages() {
         monsterImages = new HashMap<>(lv1to3Monsters.size() + lv4to7Monsters.size() + lv8to10Monsters.size());
         monsterImages.put("Rat", new Image(getClass().getResourceAsStream("/monsters/monster_rat.jpeg")));
@@ -39,8 +45,14 @@ public final class MonsterIdentities {
         monsterImages.put("Garuda", new Image(getClass().getResourceAsStream("/monsters/monster_garuda.jpeg")));
         monsterImages.put("Saturday Night Drunkard", new Image(getClass().getResourceAsStream("/monsters/monster_scary.jpeg")));
         monsterImages.put("White Gorilla Creature", new Image(getClass().getResourceAsStream("/monsters/monster_gorillaish.jpeg")));
+        monsterImages.put("Evil Dragon", new Image(getClass().getResourceAsStream("/dragons/dragon_face.jpeg")));
     }
 
+    /**
+     * Returns a randomized monster name from a collection of predefined names based on monster level
+     * @param level Level of monster
+     * @return Random monster name based on level
+     */
     public static String getMonsterName(int level) {
         if (level < 4) {
             return lv1to3Monsters.get(Main.RANDOM_SOURCE.nextInt(lv1to3Monsters.size()));

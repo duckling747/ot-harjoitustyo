@@ -27,7 +27,7 @@ public final class Io {
         ArrayList<String> saves = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("game.sav"))) {
             String s;
-            while((s = reader.readLine()) != null) {
+            while ((s = reader.readLine()) != null) {
                 saves.add(s.trim());
             }
         } catch (IOException e) {

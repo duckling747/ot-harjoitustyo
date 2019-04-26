@@ -3,6 +3,9 @@ package rpgame.creatures;
 import rpgame.items.Item;
 import rpgame.items.ItemBag;
 
+/**
+ * Class provides shared functionality for the different player available characters
+ */
 public abstract class PlayerCharacter extends Actor implements LevelUp, ItemUser {
 
     private static final double MAX_ATTR = 1.0;
@@ -27,6 +30,9 @@ public abstract class PlayerCharacter extends Actor implements LevelUp, ItemUser
         return exp;
     }
 
+    /**
+     * Implements leveling up functionality
+     */
     @Override
     public void levelUp() {
         if (level >= MAX_LV) {
@@ -54,9 +60,13 @@ public abstract class PlayerCharacter extends Actor implements LevelUp, ItemUser
         }
     }
 
+    /**
+     * @param item Item to be used
+     * @param target Target actor whom the item is acting upon
+     */
     @Override
     public void useItem(Item item, Actor target) {
-        //TODO: check if in item bag
+        // TODO check whether item exists in itembag
         item.function(target);
     }
 
