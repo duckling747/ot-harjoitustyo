@@ -8,9 +8,13 @@ Tämä on kurssin *Ohjelmistotuotanto* harjoitustyö. Tänne tulee kurssin laska
 
 [Vaatimusmäärittely](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/vaatimusmaarittely.md)
 
+[Testausdokumentti](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/testausdokumentti.md)
+
 [Työaikakirjanpito](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/tyoaikakirjanpito.md)
 
 [Arkkitehtuurikuvaus](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/arkkitehtuuri.md)
+
+[]
 
 ## Releaset
 [Viikko 5](https://github.com/duckling747/ot-harjoitustyo/releases/tag/viikko5)

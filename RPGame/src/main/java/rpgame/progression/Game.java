@@ -64,7 +64,7 @@ public class Game {
         levelMap.put("Caves intro", l5);
         levelMap.put("Crystal Caves", l6);
         levelMap.put("Final Dialogue", l7);
-        levelMap.put("Boss", l8);
+        levelMap.put("Dragon Battle", l8);
         levelMap.put("Epilogue", l9);
         l1.setNextLevel(l2);
         l2.setNextLevel(l3);

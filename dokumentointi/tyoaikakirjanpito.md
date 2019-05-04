@@ -15,4 +15,5 @@
 | 24.4 | 1 | Pikkupäivitys koodiin |
 | 25.4 | 2 | Perus load/save -toiminnallisuusrunko ja pikkupäivityksiä |
 | 26.4. | 10 | Kuvien lataus fiksummaksi, pelin eteneminen fiksummaksi, dokumentaatio, JavaDoc |
-| yht   | 69 |  |
+| 4.5. | 7 | Load/save toimivaksi, lisää JavaDoceja, lisää testejä, testausdokumentti |
+| yht   | 74 |  |

@@ -1,5 +1,6 @@
 package rpgame.ui;
 
+import java.util.List;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
@@ -22,7 +24,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import jdk.nashorn.tools.Shell;
 import rpgame.battle.Battle;
 import rpgame.creatures.MonsterIdentities;
 import rpgame.creatures.PlayerCharacter;
@@ -36,7 +37,7 @@ import rpgame.progression.Game;
 public class Menu extends Application {
 
     private static final int WIDTH = 600, HEIGHT = 400;
-    private static final Font TITLE_FONTS = Font.font("Tahoma", 30);
+    private static final Font TITLE_FONTS = Font.font("Helvetica", 30);
 
     private static Game game;
     private static int battleCounter = 0;
@@ -64,14 +65,12 @@ public class Menu extends Application {
         pane.setPrefSize(WIDTH, HEIGHT);
         Scene mainMenuScene = new Scene(pane);
 
-        // top
         Label header = new Label("Main menu");
         header.setFont(TITLE_FONTS);
         header.setPadding(new Insets(30, 30, 0, 30));
         pane.setTop(header);
         BorderPane.setAlignment(header, Pos.CENTER);
 
-        // left
         VBox leftpane = new VBox(30);
         leftpane.setAlignment(Pos.CENTER);
         leftpane.setPrefSize(WIDTH / 2, HEIGHT / 2);
@@ -97,8 +96,33 @@ public class Menu extends Application {
         buttonLoad.setPadding(insets);
         buttonLoad.setOnAction(e -> {
             if (Io.saveFileExists()) {
-                
+                List<String> choices = Io.loadGame();
+                ChoiceDialog<String> dialog = new ChoiceDialog<>(choices.get(0), choices);
+                dialog.setTitle("Select save");
+                dialog.setHeaderText("Please select a previous save");
+                dialog.setContentText("Selected save:");
+                dialog.showAndWait();
+                String[] result = dialog.getResult().split("/");
+                PlayerCharacter pc;
+                switch (result[1]) {
+                    case "warrior":
+                        pc = new WarriorCharacter(result[0]);
+                        break;
+                    case "thief":
+                        pc = new ThiefCharacter(result[0]);
+                        break;
+                    case "wizard":
+                        pc = new WizardCharacter(result[0]);
+                        break;
+                    default:
+                        throw new IllegalStateException("Character creation at load game fail");
+                }
+                game = new Game(pc, result[2]);
+                stage.setScene(getBattleScene());
+                return;
             }
+            Alert a = new Alert(Alert.AlertType.WARNING, "No save file exists!", ButtonType.OK);
+            a.showAndWait();
         });
 
         Button buttonQuit = new Button("Quit Game");
@@ -111,7 +135,6 @@ public class Menu extends Application {
         leftpane.setAlignment(Pos.CENTER);
         pane.setLeft(leftpane);
 
-        // right
         ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/scenery/bavaria.jpeg")));
         image.setFitHeight(HEIGHT / 2);
         image.setFitWidth(WIDTH / 2);
@@ -142,13 +165,11 @@ public class Menu extends Application {
         header.setFont(TITLE_FONTS);
         header.setPadding(new Insets(0, 30, 0, 30));
         vboxSelContainer.getChildren().add(header);
-        // VBOX
         Label lName = new Label("Name:");
         vboxSelContainer.getChildren().add(lName);
         lName.setPadding(new Insets(30, 30, 5, 30));
         TextField textfieldName = new TextField();
         textfieldName.setMaxWidth(WIDTH / 3);
-        //textfieldName.setPrefColumnCount(300);
         vboxSelContainer.getChildren().add(textfieldName);
         Label lCharacterType = new Label("Character type:");
         lCharacterType.setPadding(new Insets(5, 30, 5, 30));
@@ -170,7 +191,6 @@ public class Menu extends Application {
         hboxRadiogroup.setAlignment(Pos.CENTER);
         vboxSelContainer.getChildren().add(hboxRadiogroup);
         Button bStart = new Button("Start");
-        //bStart.setPadding(new Insets(20));
         bStart.setMinSize(WIDTH / 5, HEIGHT / 19);
         vboxSelContainer.getChildren().add(bStart);
         bStart.setOnAction(e -> {
@@ -187,17 +207,15 @@ public class Menu extends Application {
                     return;
                 case "Warrior":
                     character = new WarriorCharacter(textfieldName.getText());
-                    game = new Game(character);
                     break;
                 case "Wizard":
                     character = new WizardCharacter(textfieldName.getText());
-                    game = new Game(character);
                     break;
                 case "Thief":
                     character = new ThiefCharacter(textfieldName.getText());
-                    game = new Game(character);
                     break;
             }
+            game = new Game(character);
             stage.setScene(getBattleScene());
         });
         return makeSelectionsScene;
@@ -207,13 +225,13 @@ public class Menu extends Application {
         if (!game.currentLevelIsStoryInstance() && game.getCurrentLevelBattleMaximum() <= battleCounter) {
             battleCounter = 0;
             game.advanceLevel();
+            getSaveDialog();
         }
         Battle b = game.getNextBattle();
 
         BorderPane bp = new BorderPane();
         bp.setPrefSize(WIDTH, HEIGHT);
         Scene battleScene = new Scene(bp);
-        // top
         TextArea textAreaEvents = new TextArea();
         textAreaEvents.setWrapText(true);
         textAreaEvents.setEditable(false);
@@ -225,7 +243,6 @@ public class Menu extends Application {
         textAreaEvents.setPrefWidth(WIDTH - 10);
         textAreaEvents.setMaxHeight(HEIGHT / 2);
         bp.setTop(textAreaEvents);
-        // left
         VBox vboxLeft = new VBox();
         vboxLeft.setPrefHeight(HEIGHT / 2);
         ImageView playerImage;
@@ -253,7 +270,6 @@ public class Menu extends Application {
         vboxLeft.getChildren().add(healthMeter);
         vboxLeft.getChildren().add(manaMeter);
         bp.setLeft(vboxLeft);
-        // right
         VBox vboxRight = new VBox();
         vboxRight.setPrefHeight(HEIGHT / 2);
         ImageView rightImage;
@@ -278,7 +294,6 @@ public class Menu extends Application {
             vboxRight.getChildren().add(labLevelName);
         }
         bp.setRight(vboxRight);
-        //center
         Button bNext = new Button("next");
         Button bAttack = new Button("attack");
         Button bDefend = new Button("defend");
@@ -295,6 +310,7 @@ public class Menu extends Application {
                         stage.setScene(getMainMenuScene());
                         return;
                     }
+                    getSaveDialog();
                     stage.setScene(getStartSceneLoading());
                     PauseTransition pause = new PauseTransition(Duration.seconds(1));
                     pause.setOnFinished(x -> {
@@ -404,6 +420,17 @@ public class Menu extends Application {
         bp.setCenter(vboxCenter);
         BorderPane.setAlignment(vboxCenter, Pos.BOTTOM_CENTER);
         return battleScene;
+    }
+
+    private static void getSaveDialog() {
+        if (game.currentLevelIsStoryInstance()) {
+            return;
+        }
+        Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Would you like to save your progress?", ButtonType.YES, ButtonType.NO);
+        a.showAndWait();
+        if (a.getResult() == ButtonType.YES) {
+            Io.saveGame(game.getCharacterName(), game.getCharacterType(), game.getCurrentLevelName());
+        }
     }
 
 }

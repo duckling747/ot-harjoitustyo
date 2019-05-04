@@ -1,11 +1,10 @@
 package rpgame.items;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
- * A pseudo utility class for the items a player character has available
+ * A pseudo-utility class for the items a player character has available
  */
 public class ItemBag {
 
@@ -24,18 +23,7 @@ public class ItemBag {
         return items.remove(index);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        Iterator<Item> ite = items.iterator();
-        Item e = ite.next();
-        builder.append(e.toString()).append(' ');
-        while (ite.hasNext()) {
-            builder.append('\n');
-            e = ite.next();
-            builder.append(e.toString()).append(' ');
-        }
-        return builder.toString();
+    public List<Item> getItems() {
+        return items;
     }
-
 }
