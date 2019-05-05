@@ -28,7 +28,7 @@ Hahmo luodaan kirjoittamalla nimi ja valitsemalla sen tyyppi. Sitten painetaan S
 
 ### Taistelunäkymä
 
-![taistelu](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/images/battle_example.png)
+![taistelu](https://github.com/duckling747/ot-harjoitustyo/blob/master/dokumentointi/images/battlescene.png)
 
 Taistelunäkymässä on toteutettuna sekä tarinankerronta että itse taistelut. Tarina-instanssin ollessa käynnissä, next-nappula vie tarinaa eteenpäin.
 
