@@ -24,7 +24,7 @@ Sovelluksen toiminnan kannalta oletettavasti keskeisin luokka on [Game-luokka](h
 
 ## Tiedostot ja tallennus
 
-Pelin aikana pystytään tallentamaan pelin edistyminen tekstitiedostoon, joka sisältää luodun hahmon nimen, luodun hahmon tyypin ja pelin senhetkisen tason nimen. Jatkettaessa peliä päävalikon Load Game -nappulasta, peli jatkuu siitä kohtaa mihin tallennuksen aikana jäätiin. Peli tukee yhtä tallennusta kerrallaan ja tallennus toteutetaan vakiona tiedostoon "game.sav" ohjelman ajohakemistossa.
+Pelin aikana pystytään tallentamaan pelin edistyminen tekstitiedostoon, joka sisältää luodun hahmon nimen, luodun hahmon tyypin ja pelin senhetkisen tason nimen. Jatkettaessa peliä päävalikon Load Game -nappulasta, peli jatkuu siitä kohtaa mihin tallennuksen aikana jäätiin. Peli tukee montaa tallennusta kerrallaan ja tallennus toteutetaan vakiona tiedostoon "game.sav" ohjelman ajohakemistossa.
 
 ## Päätoiminnallisuus käytännössä
 
