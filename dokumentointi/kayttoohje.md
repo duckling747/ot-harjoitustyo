@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [tästä](https://github.com/duckling747/ot-harjoitustyo/releases/tag/viikko6)
+Lataa tiedosto [tästä](https://github.com/duckling747/ot-harjoitustyo/releases/tag/loppupalautus)
 
 ## Konfigurointi
 

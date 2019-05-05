@@ -20,6 +20,8 @@ Tämä on kurssin *Ohjelmistotuotanto* harjoitustyö. Tänne tulee kurssin laska
 
 [Viikko 6](https://github.com/duckling747/ot-harjoitustyo/releases/tag/viikko6)
 
+[Loppupalautus](https://github.com/duckling747/ot-harjoitustyo/releases/tag/loppupalautus)
+
 ## Komentorivi
 
 ### Testaus
