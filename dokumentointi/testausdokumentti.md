@@ -28,7 +28,7 @@ Järjestelmätestaus on toteutettu manuaalisesti.
 
 ### Asennus ja konfiguraatiot
 
-Sovellus on haettu ja sitä on testattu käyttöohjeessa kuvatulla tavalla Linux-ympäristössä sekä OpenJDK 8:lla että Oraclen Java versio 8:lla. Sovellusta ei ole testattu siten, että ohjelma ei olisi itse luonut omaa tallennustiedostoaan (mikäli sellainen haluttaisiin ohjelmaa suoritettaessa). Mitään tiedostoa ei kuitenkaan tarvitse olla luotuna tai käsillä hakemistossa ennen ajoa.
+Sovellus on haettu ja sitä on testattu käyttöohjeessa kuvatulla tavalla Linux-ympäristössä sekä OpenJDK 8:lla että Oraclen Java versio 8:lla. Sovellusta ei ole testattu siten, että ohjelma ei olisi itse luonut omaa tallennustiedostoaan (mikäli sellainen haluttaisiin ohjelmaa suoritettaessa). Mitään tiedostoa ei kuitenkaan tarvitse olla luotuna tai käsillä hakemistossa ennen ajoa. Kuitenkaan testausta varten hakemistossa ei saa olla valmiina tallennustiedostoa! Testit luovat ja poistavat tiedostoja, joten on testien toimivuuden kannalta oleellista, ettei tallennuksia olla jätetty hakemistoon.
 
 ## Sovelluksen laatuongelmat & tulevaisuudensuunnat
 
