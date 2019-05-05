@@ -1,6 +1,5 @@
 package progressionTests;
 
-import static org.hamcrest.CoreMatchers.both;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -12,7 +11,9 @@ import static org.junit.Assert.fail;
 import org.junit.Before;
 import org.junit.Test;
 import rpgame.battle.Battle;
+import rpgame.creatures.MonsterIdentities;
 import rpgame.creatures.WarriorCharacter;
+import rpgame.main.Main;
 import rpgame.progression.BasicLevel;
 import rpgame.progression.BossLevel;
 import rpgame.progression.FirstStory;
@@ -27,9 +28,14 @@ public class LevelTest {
 
     private Level l1, l2, l3, l4;
     private Game g;
+    private Main m;
+    MonsterIdentities mi;
 
     @Before
     public void initMe() {
+        m = new Main();
+        mi = new MonsterIdentities();
+        mi.initMonsterImages();
         l1 = new FirstStory("\"watashi wa gakusei desu\"", "Gordon", "Chef");
         l2 = new BasicLevel("\"Hontouni kanshashiteimasu\"", 5);
         l3 = new BossLevel();
